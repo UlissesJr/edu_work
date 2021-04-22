@@ -11,6 +11,6 @@
     <title>Title</title>
 </head>
 <body>
-
+    <h1>这是我的第一个Maven工程</h1>
 </body>
 </html>

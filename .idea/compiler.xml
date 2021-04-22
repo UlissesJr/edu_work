@@ -6,11 +6,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="Lagou_edu_home" />
         <module name="hello_maven" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="hello_maven" target="8" />
+      <module name="hello_maven" target="1.8" />
+      <module name="Lagou_edu_home" target="8" />
     </bytecodeTargetLevel>
   </component>
 </project>

@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="Lagou_edu_home:Web exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/Lagou_edu_home_Web_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="Lagou_edu_home/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="Lagou_edu_home" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
