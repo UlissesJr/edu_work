@@ -94,6 +94,8 @@
             <version>1.18.10</version>
         </dependency>
     </dependencies>
+
+
     <build>
         <plugins>
             <!-- maven编译插件 -->
@@ -102,7 +104,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
                 <configuration>
-                    <release>8</release>
+                    <release>1.8</release>
+                    <target>1.8</target>
                 </configuration>
             </plugin>
         </plugins>
