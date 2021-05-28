@@ -15,10 +15,12 @@ import java.lang.reflect.Method;
 @WebServlet("/test")
 public class TestServlet extends HttpServlet {
 
+    private static final long serialVersionUID = 1016221467564616276L;
+
     /*
-    doGet方法作为一个调度器，根据请求功能的不同，调用对应的方法
-    规定必须传递一个参数  methodName=功能名
-     */
+        doGet方法作为一个调度器，根据请求功能的不同，调用对应的方法
+        规定必须传递一个参数  methodName=功能名
+         */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -54,12 +56,12 @@ public class TestServlet extends HttpServlet {
         System.out.println("新建课程");
     }
 
-    //
+    // 根据课程名查询课程
     public void findByName(HttpServletRequest req, HttpServletResponse resp){
         System.out.println("根据课程名进行查询");
     }
 
-    // 添加课程
+    // 根据课程状态查询课程
     public void findByStatus(HttpServletRequest req, HttpServletResponse resp){
         System.out.println("根据课程状态进行查询");
     }

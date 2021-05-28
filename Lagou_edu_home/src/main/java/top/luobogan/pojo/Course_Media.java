@@ -13,6 +13,7 @@ import java.io.Serializable;
 @Data
 public class Course_Media  implements Serializable {
 
+  private static final long serialVersionUID = -4238055207056441542L;
   //课程媒体主键ID
   @JSONField(ordinal = 1)
   private int id;

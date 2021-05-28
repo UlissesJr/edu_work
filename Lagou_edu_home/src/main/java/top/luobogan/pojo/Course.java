@@ -12,6 +12,7 @@ import java.io.Serializable;
 @Data
 public class Course implements Serializable {
 
+  private static final long serialVersionUID = -1340756154431589760L;
   //使用 JSONField 设置ordinal的值,来对转换成的JSON数据进行排序
   //课程ID
   @JSONField(ordinal = 1)
