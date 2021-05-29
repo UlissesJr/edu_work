@@ -11,9 +11,9 @@
     <title>Title</title>
 </head>
 <body>
-    <a href="${pageContext.request.contextPath}/test?methodName=addCourse">新建课程</a>
-    <a href="${pageContext.request.contextPath}/test?methodName=findByName">根据课程名搜索</a>
-    <a href="${pageContext.request.contextPath}/test?methodName=findByStatus">根据状态搜索</a>
+    <a href="${pageContext.request.contextPath}/course?methodName=findCourseList">查询课程列表</a>
+    <a href="${pageContext.request.contextPath}/course?methodName=findByName">根据课程名搜索</a>
+    <a href="${pageContext.request.contextPath}/course?methodName=findByStatus">根据状态搜索</a>
 
 </body>
 </html>

@@ -1,7 +1,6 @@
-package top.luobogan.web.servlet;
+package top.luobogan.base;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,10 +9,9 @@ import java.lang.reflect.Method;
 
 /**
  * Created by LuoboGan
- * Date:2021/4/24
+ * Date:2021/5/29
  */
-@WebServlet("/test")
-public class TestServlet extends HttpServlet {
+public class BaseServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1016221467564616276L;
 
@@ -31,10 +29,10 @@ public class TestServlet extends HttpServlet {
         if(methodName != null){
             // 通过反射优化代码，提升代码的可维护性
             try {
-                // 1.获取字节码文件对象 this = TestServlet
+                // 1.获取字节码文件对象
                 Class c = this.getClass();
                 // 2.根据传入的方法名，获取对应的方法对象
-                Method method = c.getMethod(methodName,HttpServletRequest.class,HttpServletResponse.class);
+                Method method = c.getMethod(methodName, HttpServletRequest.class, HttpServletResponse.class);
                 // 3.调用method对象的 invoke方法， 执行对应的功能
                 method.invoke(this,req,resp);
 
@@ -49,20 +47,5 @@ public class TestServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         doGet(req, resp);
-    }
-
-    // 添加课程
-    public void addCourse(HttpServletRequest req, HttpServletResponse resp){
-        System.out.println("新建课程");
-    }
-
-    // 根据课程名查询课程
-    public void findByName(HttpServletRequest req, HttpServletResponse resp){
-        System.out.println("根据课程名进行查询");
-    }
-
-    // 根据课程状态查询课程
-    public void findByStatus(HttpServletRequest req, HttpServletResponse resp){
-        System.out.println("根据课程状态进行查询");
     }
 }

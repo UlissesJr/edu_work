@@ -1,7 +1,6 @@
 package top.luobogan.web.listener;
 
-import com.mysql.jdbc.AbandonedConnectionCleanupThread;
-
+import com.mysql.cj.jdbc.AbandonedConnectionCleanupThread;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
@@ -37,12 +36,7 @@ public class MyContextListener implements ServletContextListener {
             e.printStackTrace();
         }
 
-        try {
-
-            AbandonedConnectionCleanupThread.shutdown();
-            AbandonedConnectionCleanupThread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        AbandonedConnectionCleanupThread.shutdown();
+//            AbandonedConnectionCleanupThread.sleep();
     }
 }
