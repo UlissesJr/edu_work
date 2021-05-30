@@ -16,9 +16,19 @@ public class CourseServiceImpl implements CourseService {
 
     CourseDao courseDao = new CourseDaoImpl();
 
+    // 查询课程列表信息
     @Override
     public List<Course> findCourseList() {
         List<Course> courseList = courseDao.findCourseList();
         return courseList;
     }
+
+    // 根据条件查询课程信息
+    @Override
+    public List<Course> findByCourseNameAndStatus(String courseName, String status) {
+        List<Course> courseList = courseDao.findByCourseNameAndStatus(courseName,status);
+        return courseList;
+    }
+
+
 }

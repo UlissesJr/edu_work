@@ -20,4 +20,13 @@ public class CourseDaoTest {
         List<Course> courseList = courseDao.findCourseList();
         System.out.println(courseList);
     }
+
+    // 测试课程列表查询
+    @Test
+    public void testfindByCourseNameAndStatus(){
+        List<Course> courseList = courseDao.findByCourseNameAndStatus("微服务","1");
+        courseList.forEach(course -> {
+            System.out.println(course.getId() + " " + course.getCourse_name() + " " + course.getStatus());
+        });
+    }
 }
