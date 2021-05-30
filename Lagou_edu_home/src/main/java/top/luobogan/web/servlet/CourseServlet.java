@@ -63,4 +63,20 @@ public class CourseServlet extends BaseServlet {
             e.printStackTrace();
         }
     }
+
+    // 根据条件查询课程信息
+
+    /*
+        服务端获取上传文件步骤
+        1. 通过request获取请求体的内容
+        2. 解析请求体 多部件上传的特点：每一个input 都是一个表单项，根据分隔符将请求中的所有内容进行切割，
+        获取到数组，数组中每一个元素就是一个表单项
+        3. 遍历数组，分清哪个是普通上传项，哪个是文件上传项，判断是否有fileName
+        4. 获取普通上传项中的内容 通过属性 name获取
+        5. 获取文件上传项， 文件名 文件内容
+        6. 使用IO将文件的内容保存到服务器
+     */
+    public void saveCourseSalesInfo(HttpServletRequest request, HttpServletResponse response){
+
+    }
 }

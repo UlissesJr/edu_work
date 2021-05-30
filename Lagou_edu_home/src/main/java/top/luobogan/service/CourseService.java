@@ -15,4 +15,7 @@ public interface CourseService {
 
     // 根据条件查询课程信息
     public List<Course> findByCourseNameAndStatus(String courseName,String status);
+
+    // 保存课程营销信息
+    public String saveCourseSalesInfo(Course course);
 }

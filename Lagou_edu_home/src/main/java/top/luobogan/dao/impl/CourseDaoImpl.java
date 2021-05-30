@@ -27,13 +27,7 @@ public class CourseDaoImpl implements CourseDao {
         try {
             // 1.创建QueryRunner 判断是否删除，取出 is_del = 0 的数据 --> 未删除的数据
             QueryRunner qr = new QueryRunner(DruidUtils.getDataSource());
-            String sql = "SELECT\n" +
-                    "    id,\n" +
-                    "    course_name,\n" +
-                    "    price,\n" +
-                    "    sort_num,\n" +
-                    "    status\n" +
-                    "FROM course WHERE is_del = ?;";
+            String sql = "SELECT id, course_name, price, sort_num, status FROM course WHERE is_del = ?;";
 
             // 执行查询
             query = qr.query(sql, new BeanListHandler<Course>(Course.class), 0);
@@ -84,5 +78,49 @@ public class CourseDaoImpl implements CourseDao {
             throwables.printStackTrace();
             return null;
         }
+    }
+
+    // 保存课程营销信息
+    @Override
+    public int saveCourseSalesInfo(Course course) {
+
+        try {
+            // 1.创建QueryRunner
+            QueryRunner qr = new QueryRunner(DruidUtils.getDataSource());
+
+            //2.编写SQL
+            String sql = "INSERT INTO course (\n" +
+                    "                    course_name, \n" +
+                    "                    brief, \n" +
+                    "                    teacher_name, \n" +
+                    "                    teacher_info,\n" +
+                    "                    preview_first_field, \n" +
+                    "                    preview_second_field,\n" +
+                    "                    discounts,price,\n" +
+                    "                    price_tag,\n" +
+                    "                    share_image_title,\n" +
+                    "                    share_title,\n" +
+                    "                    share_description,\n" +
+                    "                    course_description,\n" +
+                    "                    course_img_url,\n" +
+                    "                    status,create_time,\n" +
+                    "                    update_time\n" +
+                    ")values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+
+            // 3.准备参数
+            Object[] param = {course.getCourse_name(),course.getBrief(),course.getTeacher_name(),course.getTeacher_info()
+            ,course.getPreview_first_field(),course.getPreview_second_field(),course.getDiscounts(),course.getPrice(),
+            course.getPrice_tag(),course.getShare_image_title(),course.getShare_image_title(),course.getShare_description(),
+            course.getCourse_description(),course.getCourse_img_url(),course.getStatus(),course.getCreate_time(),
+            course.getUpdate_time()};
+
+            // 执行插入操作
+            int update = qr.update(sql, param);
+            return update;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return 0;
     }
 }
