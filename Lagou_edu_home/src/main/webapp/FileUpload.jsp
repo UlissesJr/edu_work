@@ -16,7 +16,7 @@
             2. 表单的enctype属性必须为：multipart/form-data
             3. 表单中必须有文件上传项
      --%>
-    <form method="post" enctype="multipart/form-data" action="">
+    <form method="post" enctype="multipart/form-data" action="${pageContext.request.contextPath}/upload">
         <input type="file" name="upload">
         <br>
         <input type="text" name="name">
