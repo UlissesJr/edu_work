@@ -1,10 +1,8 @@
 package top.luobogan.testBeanUtils;
 
 import org.apache.commons.beanutils.BeanUtils;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import top.luobogan.pojo.Course;
-
-import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -41,6 +39,16 @@ public class TestBeanUtils {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Test
+    public void testIndexOfMethod(){
+        String str = "http://localhost:8080/lagou_edu_home";
+        int llo = str.indexOf("lagou_edu_home");
+        String substring = str.substring(0, llo);
+        System.out.println(llo);
+        System.out.println(substring);
+
     }
 
 }

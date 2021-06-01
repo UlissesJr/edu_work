@@ -1,6 +1,6 @@
 package top.luobogan.dao;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import top.luobogan.dao.impl.CourseDaoImpl;
 import top.luobogan.pojo.Course;
 import top.luobogan.utils.DateUtils;

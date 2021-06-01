@@ -41,7 +41,7 @@ public class CourseServiceImpl implements CourseService {
         course.setUpdate_time(strDate);
         course.setStatus(1);
 
-        // 执行拆入操作
+        // 执行插入操作
 
         int i = courseDao.saveCourseSalesInfo(course);
         if (i > 0) {
