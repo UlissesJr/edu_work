@@ -59,10 +59,15 @@ public class FileUploadServlet extends HttpServlet {
                             String newFileName = UUIDUtils.getUUID() + "_" + fileName;
 
                             // 获取输入流
-                            InputStream inputStream = item.getInputStream();
+                            // 1. 获取项目的运行目录 //E:\apache-tomcat-8.5.59\webapps\lagou_edu_home\
+                            String realPath = this.getServletContext().getRealPath("/");
+                            // 2. 截取到 webapps 目录路径
+                            String webappsPath = realPath.substring(0, realPath.indexOf("lagou_edu_home"));
 
+                            InputStream inputStream = item.getInputStream();
+                            // 3. 拼接输出路径，将图片保存到upload
                             // 创建输出流
-                            FileOutputStream fileOutputStream = new FileOutputStream("E:/upload" + newFileName);
+                            FileOutputStream fileOutputStream = new FileOutputStream(webappsPath + "/upload/" + newFileName);
 
                             // 使用 IOUtils 完成文件的 copy
                             IOUtils.copy(inputStream, fileOutputStream);

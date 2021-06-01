@@ -24,5 +24,7 @@
         <input type="submit" value="文件上传">
     </form>
 
+    <img src="/upload/52e152db295949ad8d02b5b0bb236641_A.png">
+
 </body>
 </html>
