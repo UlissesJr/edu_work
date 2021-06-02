@@ -55,7 +55,7 @@ public class CourseSaleInfoServlet extends HttpServlet {
                 if (formField) {
                     // 是普通表单项，获取表单项中的数据，保存map
                     String fieldName = fileItem.getFieldName(); // 属性名
-                    String value = fileItem.getString("ut-8");
+                    String value = fileItem.getString("utf-8");
                     System.out.println(fieldName + " " + value);
                     // 使用map 收集数据
                     map.put(fieldName,value);
@@ -73,7 +73,8 @@ public class CourseSaleInfoServlet extends HttpServlet {
                     String webappPath = realPath.substring(0, realPath.indexOf("lagou_edu_home")-1);
 
                     // 创建输出流
-                    OutputStream outputStream = new FileOutputStream(webappPath+"/upload/"+newFileName);
+                    String separator = File.separator;
+                    OutputStream outputStream = new FileOutputStream(webappPath+separator+"upload"+separator+newFileName);
 
                     // 使用 IOUtils 完成文件的 copy
                     IOUtils.copy(inputStream, outputStream);
@@ -83,7 +84,7 @@ public class CourseSaleInfoServlet extends HttpServlet {
                     inputStream.close();
 
                     // 将图片路径进行保存
-                    map.put("course_img_url",webappPath + "/upload/" + newFileName);
+                    map.put("course_img_url", separator + "upload" + separator + newFileName);
 
                 }
             }

@@ -5,6 +5,7 @@ import top.luobogan.dao.impl.CourseDaoImpl;
 import top.luobogan.pojo.Course;
 import top.luobogan.utils.DateUtils;
 
+import java.io.File;
 import java.util.List;
 
 /**
@@ -57,4 +58,13 @@ public class CourseDaoTest {
         int row = courseDao.saveCourseSalesInfo(course);
         System.out.println(row);
     }
+
+    @Test
+    public void testPathSeperate(){
+
+        String separator = File.separator;
+        System.out.println(separator);
+    }
+
+
 }
