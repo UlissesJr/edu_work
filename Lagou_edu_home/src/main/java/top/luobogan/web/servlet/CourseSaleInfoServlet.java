@@ -7,6 +7,7 @@ import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.IOUtils;
+import top.luobogan.base.Constants;
 import top.luobogan.pojo.Course;
 import top.luobogan.service.CourseService;
 import top.luobogan.service.impl.CourseServiceImpl;
@@ -84,7 +85,7 @@ public class CourseSaleInfoServlet extends HttpServlet {
                     inputStream.close();
 
                     // 将图片路径进行保存
-                    map.put("course_img_url", separator + "upload" + separator + newFileName);
+                    map.put("course_img_url", Constants.LOCAL_URL +separator + "upload" + separator + newFileName);
 
                 }
             }
