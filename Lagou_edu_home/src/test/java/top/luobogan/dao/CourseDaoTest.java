@@ -66,5 +66,24 @@ public class CourseDaoTest {
         System.out.println(separator);
     }
 
+    @Test
+    public void testUpdateCourse(){
+
+        // 1. 根据id查询课程信息
+        Course courseById = courseDao.findCourseById(1);
+        System.out.println(courseById);
+
+        // 2.修改数据
+        courseById.setCourse_name("32个Java面试必考点");
+        courseById.setTeacher_name("甘老师");
+
+        // 3.更新数据
+        int i = courseDao.updateCourseSalesInfo(courseById);
+        System.out.println(i);
+
+        Course course = courseDao.findCourseById(1);
+        System.out.println(course);
+
+    }
 
 }

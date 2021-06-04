@@ -76,7 +76,34 @@ public class CourseServlet extends BaseServlet {
         5. 获取文件上传项， 文件名 文件内容
         6. 使用IO将文件的内容保存到服务器
      */
-    public void saveCourseSalesInfo(HttpServletRequest request, HttpServletResponse response){
+//    public void saveCourseSalesInfo(HttpServletRequest request, HttpServletResponse response){
+//
+//    }
+
+    // 根据课程id查询课程信息
+    public void findCourseById(HttpServletRequest request, HttpServletResponse response){
+
+        try {
+            // 1. 接收参数
+            String id = request.getParameter("id");
+
+            // 2. 业务处理
+            CourseService service = new CourseServiceImpl();
+            Course courseById = service.findCourseById(Integer.parseInt(id));
+
+            // 3. 返回结果
+            String result = JSON.toJSONString(courseById);
+
+            response.getWriter().print(result);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
     }
+
+
+
+
 }

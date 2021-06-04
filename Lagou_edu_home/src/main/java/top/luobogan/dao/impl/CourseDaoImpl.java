@@ -1,11 +1,14 @@
 package top.luobogan.dao.impl;
 
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import top.luobogan.dao.CourseDao;
 import top.luobogan.pojo.Course;
+import top.luobogan.utils.DateUtils;
 import top.luobogan.utils.DruidUtils;
 
+import javax.management.Query;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -123,4 +126,65 @@ public class CourseDaoImpl implements CourseDao {
 
         return 0;
     }
+
+    // 根据ID查询课程信息
+    @Override
+    public Course findCourseById(int id) {
+
+        try {
+            QueryRunner qr = new QueryRunner(DruidUtils.getDataSource());
+            String sql = "Select id,course_name,brief,teacher_name,teacher_info,preview_first_field,preview_second_field,\n" +
+                    "discounts,price,price_tag,course_img_url,share_image_title,share_title,share_description,\n" +
+                    "course_description,status from course where id = ?;";
+
+            Course course = qr.query(sql, new BeanHandler<Course>(Course.class), id);
+            return course;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+
+    // 根据id修改课程营销信息
+    @Override
+    public int updateCourseSalesInfo(Course course) {
+
+        try {
+            QueryRunner qr = new QueryRunner(DruidUtils.getDataSource());
+            String sql = "update course set\n" +
+                    "course_name = ?,\n" +
+                    "brief = ?,\n" +
+                    "teacher_name = ?,\n" +
+                    "teacher_info = ?,\n" +
+                    "preview_first_field = ?,\n" +
+                    "preview_second_field = ?,\n" +
+                    "discounts = ?,\n" +
+                    "price = ?,\n" +
+                    "price_tag = ?,\n" +
+                    "share_image_title = ?,\n" +
+                    "share_title = ?,\n" +
+                    "share_description = ?,\n" +
+                    "course_description = ?,\n" +
+                    "course_img_url = ?,\n" +
+                    "status = ?,\n" +
+                    "create_time = ?,\n" +
+                    "update_time = ?\n" +
+                    "where id = ?;";
+
+            Object[] param = {course.getCourse_name(),course.getBrief(),course.getTeacher_name(),
+            course.getCourse_name(),course.getPreview_first_field(),course.getPreview_second_field(),
+            course.getDiscounts(),course.getPrice(),course.getPrice_tag(),course.getShare_image_title(),
+            course.getShare_title(),course.getShare_description(),course.getCourse_description(),
+            course.getCourse_img_url(),course.getStatus(),course.getCreate_time(),course.getUpdate_time(),course.getId()};
+
+            int row = qr.update(sql, param);
+            return row;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return 0;
+    }
+
+
 }

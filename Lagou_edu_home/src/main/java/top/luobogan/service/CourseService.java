@@ -18,4 +18,10 @@ public interface CourseService {
 
     // 保存课程营销信息
     public String saveCourseSalesInfo(Course course);
+
+    // 根据id查询课程信息
+    public Course findCourseById(int id);
+
+    // 根据id修改课程信息
+    public String updateCourseSalesInfo(Course course);
 }

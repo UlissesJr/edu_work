@@ -50,4 +50,23 @@ public class CourseServiceImpl implements CourseService {
             return StatusCode.FAIL.toString();
         }
     }
+
+    @Override
+    public Course findCourseById(int id) {
+
+        return courseDao.findCourseById(id);
+
+    }
+
+    @Override
+    public String updateCourseSalesInfo(Course course) {
+
+        int row = courseDao.updateCourseSalesInfo(course);
+
+        if (row > 0) {
+            return StatusCode.SUCCESS.toString();
+        }
+
+        return StatusCode.FAIL.toString();
+    }
 }

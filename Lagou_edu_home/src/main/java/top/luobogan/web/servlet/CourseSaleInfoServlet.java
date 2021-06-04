@@ -1,9 +1,7 @@
 package top.luobogan.web.servlet;
 
-import com.alibaba.druid.util.DruidDataSourceUtils;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.IOUtils;
@@ -13,7 +11,6 @@ import top.luobogan.service.CourseService;
 import top.luobogan.service.impl.CourseServiceImpl;
 import top.luobogan.utils.DateUtils;
 import top.luobogan.utils.UUIDUtils;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -93,18 +90,25 @@ public class CourseSaleInfoServlet extends HttpServlet {
             // 使用BeanUtils将map中的数据封装到course对象
             BeanUtils.populate(course,map);
 
-            // 业务处理
+            // 根据是否有 id 字段，来确定是新增数据还是修改数据
             CourseService courseService = new CourseServiceImpl();
-            String result = courseService.saveCourseSalesInfo(course);
+            String dateFormart = DateUtils.getDateFormart();
+            String result;
 
-            // 响应结果
+            if (map.get("id") != null) {
+                // 修改操作
+                result = courseService.updateCourseSalesInfo(course);
+            }else{
+                // 新增操作
+                course.setCreate_time(dateFormart);
+                result = courseService.saveCourseSalesInfo(course);
+            }
+
             resp.getWriter().print(result);
-
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-
 
     }
 
