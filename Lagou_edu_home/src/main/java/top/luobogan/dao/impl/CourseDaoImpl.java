@@ -186,5 +186,24 @@ public class CourseDaoImpl implements CourseDao {
         return 0;
     }
 
+    // 修改课程状态
+    @Override
+    public int updateCourseStatus(Course course) {
+
+        try {
+
+            QueryRunner qr = new QueryRunner();
+            String sql = "UPDATE course set status = ?,update_time = ? where id = ?;";
+            Object[] param = {course.getStatus(),course.getUpdate_time(),course.getId()};
+            int row = qr.update(sql, param);
+            return row;
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return 0;
+    }
+
 
 }

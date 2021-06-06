@@ -6,6 +6,7 @@ import top.luobogan.dao.impl.CourseDaoImpl;
 import top.luobogan.pojo.Course;
 
 import java.util.List;
+import java.util.Map;
 
 // 课程管理模块 Service层接口
 public interface CourseService {
@@ -24,4 +25,7 @@ public interface CourseService {
 
     // 根据id修改课程信息
     public String updateCourseSalesInfo(Course course);
+
+    // 修改课程状态
+    public Map<String,Integer> updateCourseStatus(Course course);
 }

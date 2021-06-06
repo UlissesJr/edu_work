@@ -27,5 +27,8 @@ public interface CourseDao {
     // 根据id修改课程营销信息
     public int updateCourseSalesInfo(Course course);
 
+    // 修改课程状态
+    public int updateCourseStatus(Course course);
+
 
 }

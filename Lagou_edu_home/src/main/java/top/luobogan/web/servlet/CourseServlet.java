@@ -6,12 +6,14 @@ import top.luobogan.base.BaseServlet;
 import top.luobogan.pojo.Course;
 import top.luobogan.service.CourseService;
 import top.luobogan.service.impl.CourseServiceImpl;
+import top.luobogan.utils.DateUtils;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by LuoboGan
@@ -103,7 +105,41 @@ public class CourseServlet extends BaseServlet {
 
     }
 
+    // 修改课程状态
+    public void updateCourseStatus(HttpServletRequest request, HttpServletResponse response){
 
+        // 1.获取参数
+        String id = request.getParameter("id");
 
+        // 2.业务处理
+        CourseService service = new CourseServiceImpl();
+
+        // 根据课程id 传递课程信息
+        Course course = service.findCourseById(Integer.parseInt(id));
+
+        // 判断课程信息状态，进行取反设置
+        int status = course.getStatus();
+        if (status == 0) {
+            course.setStatus(1);
+        }else{
+            course.setStatus(0);
+        }
+
+        // 设置更新时间
+        course.setUpdate_time(DateUtils.getDateFormart());
+
+        // 修改课程状态
+        Map<String, Integer> stringIntegerMap = service.updateCourseStatus(course);
+
+        // 响应结果
+        String result = JSON.toJSONString(stringIntegerMap);
+
+        try {
+            response.getWriter().print(result);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 
 }
