@@ -80,7 +80,15 @@ public class CourseContentServlet extends BaseServlet {
 
             // 业务处理
             CourseContentService courseContentService = new CourseContentServiceImpl();
-            String result = courseContentService.saveSection(course_section);
+
+            // 判断参数中是否携带 id
+            String result = null;
+            if (course_section.getId() == 0 ) {
+                // 新增的操作
+                result = courseContentService.saveSection(course_section);
+            }else{
+                result = courseContentService.updateSection(course_section);
+            }
 
             //响应结果
             response.getWriter().write(result);

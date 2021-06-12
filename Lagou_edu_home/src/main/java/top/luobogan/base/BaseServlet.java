@@ -23,7 +23,7 @@ public class BaseServlet extends HttpServlet {
         规定必须传递一个参数  methodName=功能名
          */
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
 
         // 1.获取参数 要访问的方法名
 //        String methodName = req.getParameter("methodName");
