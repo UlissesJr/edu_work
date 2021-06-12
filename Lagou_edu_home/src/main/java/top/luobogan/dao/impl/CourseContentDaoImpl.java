@@ -1,8 +1,10 @@
 package top.luobogan.dao.impl;
 
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import top.luobogan.dao.CourseContentDao;
+import top.luobogan.pojo.Course;
 import top.luobogan.pojo.Course_Lesson;
 import top.luobogan.pojo.Course_Section;
 import top.luobogan.utils.DruidUtils;
@@ -49,9 +51,9 @@ public class CourseContentDaoImpl implements CourseContentDao {
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+            return null;
         }
 
-        return null;
     }
 
     // 根据章节ID，查询章节相关的课时信息
@@ -73,8 +75,84 @@ public class CourseContentDaoImpl implements CourseContentDao {
             return lessonList;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+            return null;
         }
 
-        return null;
+    }
+
+    // 根据课程id 回显课程信息
+    @Override
+    public Course findCourseByCourseId(int CourseId) {
+        try {
+            // 1.创建 QueryRunner
+            QueryRunner qr = new QueryRunner(DruidUtils.getDataSource());
+
+            // 2.编写SQL
+            String sql = "SELECT id,course_name from course where id = ?;";
+
+            // 3.执行查询
+            Course course = qr.query(sql, new BeanHandler<>(Course.class), CourseId);
+
+            return course;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
+
+    // 保存章节的信息
+    @Override
+    public int saveSection(Course_Section courseSection) {
+
+        try {
+            // 1.创建 QueryRunner
+            QueryRunner qr = new QueryRunner(DruidUtils.getDataSource());
+
+            // 2.编写SQL
+            String sql = "INSERT INTO course_section\n" +
+                    "(course_id,section_name,description,order_num,status,create_time,update_time)\n" +
+                    "values (?,?,?,?,?,?,?);";
+
+            Object[] param = {courseSection.getCourse_id(),courseSection.getSection_name(),
+            courseSection.getDescription(),courseSection.getOrder_num(),courseSection.getStatus(),
+                    courseSection.getCreate_time(), courseSection.getUpdate_time()};
+
+            // 3.执行插入
+            int row = qr.update(sql, param);
+            return row;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+
+    }
+
+    // 修改章节
+    @Override
+    public int updateSection(Course_Section courseSection) {
+
+        try {
+            // 1.创建 QueryRunner
+            QueryRunner qr = new QueryRunner(DruidUtils.getDataSource());
+
+            // 2.编写SQL
+            String sql = "update course_section\n" +
+                    "set section_name=?,description=?,order_num=?,status=?,update_time=?\n" +
+                    "where id = ?;";
+
+            Object[] param = {courseSection.getSection_name(),
+                    courseSection.getDescription(),courseSection.getOrder_num(),courseSection.getStatus(),
+                    courseSection.getUpdate_time(),courseSection.getId()};
+
+            int row = qr.update(sql, param);
+            return row;
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return 0;
+        }
     }
 }

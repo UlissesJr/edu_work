@@ -1,5 +1,6 @@
 package top.luobogan.dao;
 
+import top.luobogan.pojo.Course;
 import top.luobogan.pojo.Course_Lesson;
 import top.luobogan.pojo.Course_Section;
 
@@ -17,5 +18,14 @@ public interface CourseContentDao {
 
     // 根据章节ID，查询章节相关的课时信息
     public List<Course_Lesson> findLessonBySectionId(int sectionId);
+
+    // 根据课程id 回显课程信息
+    public Course findCourseByCourseId(int CourseId);
+
+    // 保存章节的信息
+    public int saveSection(Course_Section courseSection);
+
+    // 修改章节
+    public int updateSection(Course_Section courseSection);
 
 }
