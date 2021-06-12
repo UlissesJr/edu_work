@@ -155,4 +155,29 @@ public class CourseContentDaoImpl implements CourseContentDao {
             return 0;
         }
     }
+
+    // 修改章节状态
+    @Override
+    public int updateSectionStatus(int id, int status) {
+
+        try {
+            // 1.创建 QueryRunner
+            QueryRunner qr = new QueryRunner(DruidUtils.getDataSource());
+
+            // 2.编写SQL
+            String sql = "update course_section\n" +
+                    "set status=? \n" +
+                    "where id = ?;";
+
+            Object[] param = {status,id};
+
+            int row = qr.update(sql, param);
+            return row;
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return 0;
+        }
+
+    }
 }

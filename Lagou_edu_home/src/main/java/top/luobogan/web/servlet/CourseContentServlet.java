@@ -12,7 +12,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Map;
 
@@ -98,4 +97,25 @@ public class CourseContentServlet extends BaseServlet {
         }
 
     }
+
+    // 修改章节状态
+    public void updateSectionStatus(HttpServletRequest request, HttpServletResponse response){
+
+        try {
+            // 获取参数
+            String status = request.getParameter("status");
+            String id = request.getParameter("id");
+
+            // 运行service
+            // 2.业务处理
+            CourseContentService contentService = new CourseContentServiceImpl();
+            String result = contentService.updateSectionStatus(Integer.parseInt(id), Integer.parseInt(status));
+
+            response.getWriter().print(result);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

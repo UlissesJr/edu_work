@@ -72,4 +72,20 @@ public class CourseContentServiceImpl implements CourseContentService {
         String result = StatusCode.FAIL.toString();
         return result;
     }
+
+    @Override
+    public String updateSectionStatus(int id, int status) {
+
+        // 调用DAO
+        int row = courseContentDao.updateSectionStatus(id,status);
+
+        if (row > 0) {
+            //保存成功
+            String result = StatusCode.SUCCESS.toString();
+            return result;
+        }
+
+        String result = StatusCode.FAIL.toString();
+        return result;
+    }
 }
