@@ -58,6 +58,9 @@ public class Course_Lesson  implements Serializable {
   @JSONField(ordinal = 11)
   private int isDel;
 
+  // 章节的属性
+  private Course_Section courseSection;
+
   @Override
   public String toString() {
     return "Course_Lesson{" +
