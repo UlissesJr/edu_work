@@ -20,7 +20,7 @@
             var name = $(this).val();
 
             // 判断用户名不为空和空串
-            if (name != ull && name != "") {
+            if (name != null && name != "") {
                 // 向后台发送请求
                 $.ajax({
                     url:"/checkName",
@@ -44,7 +44,7 @@
             }
 
         });
-    })
+    });
 
 
 
@@ -53,7 +53,7 @@
 
 <body>
 
-    <form action="#" method="POST">
+    <form action="#" method="post">
         用户名<input type="text" id="username" name="username" placeholder="请输入用户名">
         <span id="spanMsg" style="color: #ff0000"></span><br>
         密码<input type="text" id="password" name="password" placeholder="请输入密码">
