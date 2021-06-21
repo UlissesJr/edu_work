@@ -10,6 +10,7 @@
 <head>
     <title>new jsp</title>
 </head>
+<script typet="text/javascript" src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
 <script>
     // 原生JS方式发送AJAX请求
     function run() {
@@ -61,12 +62,61 @@
         }
     }
 
+    // 采用JQuery进行异步GET请求
+    function run2() {
+        var url = "/login";
+        var data = {username:"jack"};
+
+        $.get(url,data,function (param){
+            alert("GET异步请求 响应成功：" + param)
+        },"text")
+    }
+
+    // 采用JQuery进行异步POST请求
+    function run3() {
+        var url = "/login";
+        var data = {username:"lucy"};
+
+        $.post(url,data,function (param){
+            alert("POST异步请求 响应成功：" + param)
+        },"text")
+    }
+
+    // 采用AJAX进行异步请求
+    function run4() {
+
+        $.ajax({
+            url:"/login",
+            async:true,
+            data:{username:"giao"},
+            type:"GET", // 请求方式
+            dataType:"text", // 返回数据的数据类型
+
+            success:function (param) {
+                alert("响应成功!" + param);
+            },
+            error:function (param) {
+                alert("响应失败!" + param);
+            }
+        });
+
+    }
+
 </script>
 <body>
     <input type="button" value="原生JS发送异步请求" onclick="run()"><br>
     局部刷新 <label>
         <input type="text">
     </label>
+    <br>
 
+    <input type="button" value="JQuery发送异步GET请求run2" onclick="run2()"><br>
+    <br>
+
+    <br>
+    <input type="button" value="JQuery发送异步POST请求run3" onclick="run3()"><br>
+
+    <br>
+    <input type="button" value="AJAX发送异步POST请求run4" onclick="run4()"><br>
 </body>
 </html>

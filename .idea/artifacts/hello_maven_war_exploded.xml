@@ -13,6 +13,9 @@
         <element id="directory" name="classes">
           <element id="module-output" name="hello_maven" />
         </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: com.alibaba:fastjson:1.2.73" />
+        </element>
       </element>
       <element id="directory" name="META-INF">
         <element id="file-copy" path="$PROJECT_DIR$/hello_maven/target/hello_maven-1.0-SNAPSHOT/META-INF/MANIFEST.MF" />
