@@ -31,7 +31,7 @@ public class BaseServlet extends HttpServlet {
         // 1. 获取Content-Type 请求的类型
         String contentType = req.getHeader("Content-Type");
         // 判断传递的数据是不是JSON格式
-        if (contentType.contains("application/json")) {
+        if ( contentType.contains("application/json") ) {
             // 是JSON格式，调用getPostJson方法
             String postJson = this.getPostJson(req);
             // 将JSON格式的字符串转换为map
