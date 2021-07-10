@@ -35,7 +35,13 @@
 
     <!--加载映射配置-->
     <mappers>
-        <mapper resource="Mapper/UserMapper.xml"></mapper>
+        <!--  <mapper resource="top/luobogan/mapper/UserMapper.xml"></mapper>  -->
+        <!--  使用该方式：接口和映射文件必须同包同名（目录结构一致）  -->
+        <!--  <mapper class="top.luobogan.mapper.UserMapper"></mapper>-->
+        <!--  批量加载映射  -->
+        <package name="top.luobogan.mapper"/>
+
+
     </mappers>
 
 </configuration>
