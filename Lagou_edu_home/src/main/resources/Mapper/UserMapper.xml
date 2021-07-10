@@ -3,6 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="UserMapper">
+
     <!--查询所有-->
     <!-- namespace:命名空间：与id属性共同构成唯一标识 namespace.id:  UserMapper.findAll
         resultType:返回结果类型（自动映射封装）：要封装的尸体的全路径
@@ -10,4 +11,13 @@
     <select id="findAll" resultType="top.luobogan.pojo.User">
         select * from user
     </select>
+
+    <!--  新增用户
+            #{} ： mybatis中的占位符，等同于JDBC中的?
+            parameterType: 指定接收到的参数类型
+    -->
+    <insert id="saveUser" parameterType="top.luobogan.pojo.User">
+        insert into user(username,birthday,sex,address) values (#{username},#{birthday},#{sex},#{address}) ;
+    </insert>
+
 </mapper>
