@@ -96,4 +96,28 @@ public class UserTest {
         // 释放资源
         sqlSession.close();
     }
+
+    @Test
+    public void testDelete() throws Exception {
+
+        // 加载核心配置文件
+        InputStream is = Resources.getResourceAsStream("SqlMapConfig.xml");
+
+        // 获取SqlSessionFactory工厂对象
+        SqlSessionFactory sqlSessionFactory = new
+                SqlSessionFactoryBuilder().build(is);
+
+        // 获取SqlSession会话对象
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+
+        // 执行sql
+        sqlSession.delete("UserMapper.delete", 3);
+
+        // DML语句，手动提交事务
+        sqlSession.commit();
+
+        // 释放资源
+        sqlSession.close();
+    }
+
 }

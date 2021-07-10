@@ -26,5 +26,10 @@
                         sex = #{sex},address = #{address} where id = #{id}
     </update>
 
+    <!--删除-->
+    <delete id="delete" parameterType="java.lang.Integer">
+        delete from user where id = #{id}
+    </delete>
+
 
 </mapper>
