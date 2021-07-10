@@ -20,4 +20,11 @@
         insert into user(username,birthday,sex,address) values (#{username},#{birthday},#{sex},#{address}) ;
     </insert>
 
+    <!--修改-->
+    <update id="update" parameterType="top.luobogan.pojo.User">
+        update user set username = #{username},birthday = #{birthday},
+                        sex = #{sex},address = #{address} where id = #{id}
+    </update>
+
+
 </mapper>
