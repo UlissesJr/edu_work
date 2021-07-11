@@ -123,7 +123,7 @@ public class UserTest {
     }
 
     @Test
-    public void testMapperFindAll() throws IOException {
+    public void testMapperFindAllById() throws IOException {
 
         // 加载核心配置文件
         InputStream is = Resources.getResourceAsStream("SqlMapConfig.xml");
@@ -142,6 +142,34 @@ public class UserTest {
         User user = userMapper.findUserById(1); // 解决statement硬编码问题
 
         System.out.println(user);
+
+        // 释放资源
+        sqlSession.close();
+
+    }
+
+    @Test
+    public void testMapperFindAll() throws IOException {
+
+        // 加载核心配置文件
+        InputStream is = Resources.getResourceAsStream("SqlMapConfig.xml");
+
+        // 获得SqlSessionFactory工厂对象
+        SqlSessionFactory sqlSessionFactory = new
+                SqlSessionFactoryBuilder().build(is);
+
+        // 获得SqlSession会话对象
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+
+        // 获得Mapper代理对象 不在写实现类
+        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+
+        // 执行查询
+        List<User> allResultMap = userMapper.findAllResultMap();
+
+        for(User user : allResultMap){
+            System.out.println(user);
+        }
 
         // 释放资源
         sqlSession.close();

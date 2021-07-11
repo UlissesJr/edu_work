@@ -16,4 +16,21 @@
         select * from user where id = #{id}
     </select>
 
+    <!--  手动配置实体属性与表中字段的映射关系，完成手动封装  -->
+    <!--  id：标签的唯一标识  type：封装后的实体类型  -->
+    <resultMap id="userResultMap" type="top.luobogan.pojo.User">
+        <!--  手动配置映射关系  -->
+        <!--  id 用来配置主键  property 对应实体中的属性名 column对应数据表的字段名  -->
+        <id property="id" column="id"></id>
+        <!--  result就是对表中普通字段封装  -->
+        <result property="username" column="username"></result>
+        <result property="birthday" column="birthday"></result>
+        <result property="sex" column="sex"></result>
+        <result property="address" column="address"></result>
+    </resultMap>
+
+    <select id="findAllResultMap"  resultMap="userResultMap">
+        select * from user
+    </select>
+
 </mapper>
