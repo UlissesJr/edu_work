@@ -46,4 +46,30 @@ public class OrdersTest {
         sqlSession.close();
     }
 
+    @Test
+    public void findAllWithOrders() throws IOException {
+        // 加载核心配置文件
+        InputStream is = Resources.getResourceAsStream("SqlMapConfig.xml");
+
+        // 获得SqlSessionFactory工厂对象
+        SqlSessionFactory sqlSessionFactory = new
+                SqlSessionFactoryBuilder().build(is);
+
+        // 获得SqlSession会话对象
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+
+        // 获得Mapper代理对象 不在写实现类
+        OrdersMapper ordersMapper = sqlSession.getMapper(OrdersMapper.class);
+
+        // 执行查询
+        List<Orders> allWithUser = ordersMapper.findAllWithOrders();
+
+        for (Orders order : allWithUser) {
+            System.out.println(order);
+        }
+
+        // 释放资源
+        sqlSession.close();
+    }
+
 }
