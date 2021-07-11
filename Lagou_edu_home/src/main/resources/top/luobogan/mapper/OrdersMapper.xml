@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="top.luobogan.mapper.OrdersMapper">
+
+    <!--
+        对一关联查询：查询所有订单，与此同时还要查询出每个订单所属的用户信息
+        因为是关联查询，所以我们应该使用 resultMap
+    -->
+    <resultMap id="ordersUserMap" type="top.luobogan.pojo.Orders">
+        <!--  先设置主键  -->
+        <id property="id" column="id"/>
+        <result property="ordertime" column="ordertime"/>
+        <result property="total" column="total"/>
+        <result property="uid" column="uid"/>
+
+        <!--
+            association: 在进行一对一关联查询配置时，使用association标签进行关联
+            property： 要封装实体的属性名
+            javaType:  要封装的实体的类的全限定类名
+        -->
+        <association property="user" javaType="top.luobogan.pojo.User">
+            <id property="id" column="uid"/>
+            <result property="username" column="username"/>
+            <result property="birthday" column="birthday"/>
+            <result property="sex" column="sex"/>
+            <result property="address" column="address"/>
+        </association>
+    </resultMap>
+    
+    <select id="findAllWithUser" resultMap="ordersUserMap">
+        select * from orders o left join user u on o.uid = u.id
+    </select>
+
+</mapper>
