@@ -1,5 +1,7 @@
 package top.luobogan.MybatisTest;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -472,6 +474,47 @@ public class UserTest {
         for (User user : byList) {
             System.out.println(user);
         }
+
+        // 释放资源
+        sqlSession.close();
+
+    }
+
+
+    @Test
+    public void findAllPageHelper() throws IOException {
+
+        // 加载核心配置文件
+        InputStream is = Resources.getResourceAsStream("SqlMapConfig.xml");
+
+        // 获得SqlSessionFactory工厂对象
+        SqlSessionFactory sqlSessionFactory = new
+                SqlSessionFactoryBuilder().build(is);
+
+        // 获得SqlSession会话对象
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+
+        // 获得Mapper代理对象 不在写实现类
+        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+
+        //设置分页参数
+        PageHelper.startPage(1,2);
+
+        // 执行查询
+        List<User> byList = userMapper.findAllResultMap();
+
+        for(User user : byList){
+            System.out.println(user);
+        }
+
+        //其他分页的数据
+        PageInfo<User> pageInfo = new PageInfo<User>(byList);
+        System.out.println("总条数："+pageInfo.getTotal());
+        System.out.println("总页数："+pageInfo.getPages());
+        System.out.println("当前页："+pageInfo.getPageNum());
+        System.out.println("每页显示长度："+pageInfo.getPageSize());
+        System.out.println("是否第一页："+pageInfo.isIsFirstPage());
+        System.out.println("是否最后一页："+pageInfo.isIsLastPage());
 
         // 释放资源
         sqlSession.close();

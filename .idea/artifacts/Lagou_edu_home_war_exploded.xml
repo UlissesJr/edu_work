@@ -29,6 +29,8 @@
           <element id="library" level="project" name="Maven: com.thetransactioncompany:cors-filter:2.5" />
           <element id="library" level="project" name="Maven: com.thetransactioncompany:java-property-utils:1.9.1" />
           <element id="library" level="project" name="Maven: org.jetbrains:annotations:21.0.1" />
+          <element id="library" level="project" name="Maven: com.github.pagehelper:pagehelper:3.7.5" />
+          <element id="library" level="project" name="Maven: com.github.jsqlparser:jsqlparser:0.9.1" />
         </element>
       </element>
       <element id="directory" name="META-INF">
