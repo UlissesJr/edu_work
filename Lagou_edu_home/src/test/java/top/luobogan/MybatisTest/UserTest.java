@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.jupiter.api.Test;
 import top.luobogan.mapper.UserMapper;
 import top.luobogan.pojo.User;
+import top.luobogan.utils.DateUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -278,6 +279,74 @@ public class UserTest {
         for (User user : byUsername) {
             System.out.println(user);
         }
+
+        // 释放资源
+        sqlSession.close();
+
+    }
+
+    @Test
+    public void saveUser() throws IOException {
+
+        // 加载核心配置文件
+        InputStream is = Resources.getResourceAsStream("SqlMapConfig.xml");
+
+        // 获得SqlSessionFactory工厂对象
+        SqlSessionFactory sqlSessionFactory = new
+                SqlSessionFactoryBuilder().build(is);
+
+        // 获得SqlSession会话对象
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+
+        // 获得Mapper代理对象 不在写实现类
+        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+
+        // 执行查询
+        User user1 = new User();
+        user1.setAddress("河南周口");
+        user1.setUsername("管至伟");
+        user1.setSex("男");
+        user1.setBirthday(new Date());
+        System.out.println(user1);
+
+        userMapper.saveUser(user1);
+        System.out.println(user1);
+
+        sqlSession.commit();
+
+        // 释放资源
+        sqlSession.close();
+
+    }
+
+    @Test
+    public void saveUser2() throws IOException {
+
+        // 加载核心配置文件
+        InputStream is = Resources.getResourceAsStream("SqlMapConfig.xml");
+
+        // 获得SqlSessionFactory工厂对象
+        SqlSessionFactory sqlSessionFactory = new
+                SqlSessionFactoryBuilder().build(is);
+
+        // 获得SqlSession会话对象
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+
+        // 获得Mapper代理对象 不在写实现类
+        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+
+        // 执行查询
+        User user1 = new User();
+        user1.setAddress("河南周口");
+        user1.setUsername("管至伟");
+        user1.setSex("男");
+        user1.setBirthday(new Date());
+        System.out.println(user1);
+
+        userMapper.saveUser2(user1);
+        System.out.println(user1);
+
+        sqlSession.commit();
 
         // 释放资源
         sqlSession.close();

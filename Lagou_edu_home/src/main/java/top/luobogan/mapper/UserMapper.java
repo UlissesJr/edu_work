@@ -25,5 +25,12 @@ public interface UserMapper {
     // 模糊查询
     public List<User> findByUsername(String username);
 
+    // 添加user，获取返回主键 useGeneratedKeys
+    public void saveUser(User user);
+
+    // 添加user，获取返回主键  selectKey
+    public void saveUser2(User user);
+
+
 
 }
