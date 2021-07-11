@@ -36,10 +36,10 @@
         <!--  id 用来配置主键  property 对应实体中的属性名 column对应数据表的字段名  -->
         <id property="id" column="id"></id>
         <!--  result就是对表中普通字段封装  -->
-        <result property="username" column="username"></result>
-        <result property="birthday" column="birthday"></result>
-        <result property="sex" column="sex"></result>
-        <result property="address" column="address"></result>
+        <result property="username" column="username"/>
+        <result property="birthday" column="birthday"/>
+        <result property="sex" column="sex"/>
+        <result property="address" column="address"/>
     </resultMap>
 
     <select id="findAllResultMap"  resultMap="userResultMap">
@@ -98,6 +98,87 @@
         </selectKey>
         insert into user (username,birthday,sex,address) values (#{username},#{birthday},#{sex},#{address})
     </insert>
+
+    <!--
+        where标签相当于 where 1=1，但是如果没有条件，就不会拼接where关键字
+    -->
+    <select id="findByIdAndUsernameIf" parameterType="user" resultType="user">
+        SELECT * FROM user
+        <where>
+            <!--  test里面写的就是表达式  -->
+            <if test="id != null">
+                AND id = #{id}
+            </if>
+            <if test="username != null">
+                AND username = #{username}
+            </if>
+        </where>
+    </select>
+
+    <!--
+        set标签在更新的时候，自动加上set关键字，然后去掉最后一个条件的逗号
+    -->
+    <update id="updateIf" parameterType="user">
+        UPDATE user
+        <!--  注意这里每一句结尾都有一个逗号  -->
+        <set>
+            <if test="username != null">
+                username = #{username},
+            </if>
+            <if test="birthday != null">
+                birthday = #{birthday},
+            </if>
+            <if test="sex !=null">
+                sex = #{sex},
+            </if>
+            <if test="address !=null">
+                address = #{address},
+            </if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <!--
+        如果查询条件为普通类型 List集合，collection属性值为：collection 或者 list
+    -->
+    <select id="findByList" parameterType="list" resultType="user" >
+        SELECT * FROM user
+        <where>
+            <!--
+                collection: 代表要遍历的集合元素 通常写collection或者list
+                open: 代表语句的开始部分
+                close：代表语句的结束部分
+                item：代表遍历集合中的每个元素，生成的变量名
+                separator：代表元素之间的分隔符
+            -->
+            <foreach collection="collection" open="id in(" close=")" item="id"
+                     separator=",">
+                #{id}
+            </foreach>
+        </where>
+    </select>
+
+    <!--
+        如果查询条件为普通类型 Array数组，collection属性值为：array
+    -->
+    <!--  sql片段引入  -->
+    <sql id="selectUser">
+        select * from user
+    </sql>
+    <select id="findByArray" parameterType="int" resultType="user">
+        <include refid="selectUser"/>
+        <where>
+            <foreach collection="array" open="id in(" close=")" item="id"
+                     separator=",">
+                #{id}
+            </foreach>
+        </where>
+    </select>
+
+
+
+
+
 
 
 </mapper>

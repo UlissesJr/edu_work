@@ -11,6 +11,7 @@ import top.luobogan.utils.DateUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -352,6 +353,131 @@ public class UserTest {
         sqlSession.close();
 
     }
+
+    @Test
+    public void findByIdAndUsernameIf() throws IOException {
+
+        // 加载核心配置文件
+        InputStream is = Resources.getResourceAsStream("SqlMapConfig.xml");
+
+        // 获得SqlSessionFactory工厂对象
+        SqlSessionFactory sqlSessionFactory = new
+                SqlSessionFactoryBuilder().build(is);
+
+        // 获得SqlSession会话对象
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+
+        // 获得Mapper代理对象 不在写实现类
+        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+
+        // 执行查询
+        User user1 = new User();
+
+        List<User> byIdAndUsernameIf = userMapper.findByIdAndUsernameIf(user1);
+
+        for (User user : byIdAndUsernameIf) {
+            System.out.println(user);
+        }
+
+        // 释放资源
+        sqlSession.close();
+
+    }
+
+    @Test
+    public void updateIf() throws IOException {
+
+        // 加载核心配置文件
+        InputStream is = Resources.getResourceAsStream("SqlMapConfig.xml");
+
+        // 获得SqlSessionFactory工厂对象
+        SqlSessionFactory sqlSessionFactory = new
+                SqlSessionFactoryBuilder().build(is);
+
+        // 获得SqlSession会话对象
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+
+        // 获得Mapper代理对象 不在写实现类
+        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+
+        // 执行查询
+        User user1 = new User();
+        user1.setId(1);
+        user1.setUsername("甘富文");
+        user1.setAddress("北京中南海");
+
+        userMapper.updateIf(user1);
+
+        sqlSession.commit();
+
+        // 释放资源
+        sqlSession.close();
+
+    }
+
+    @Test
+    public void findByList() throws IOException {
+
+        // 加载核心配置文件
+        InputStream is = Resources.getResourceAsStream("SqlMapConfig.xml");
+
+        // 获得SqlSessionFactory工厂对象
+        SqlSessionFactory sqlSessionFactory = new
+                SqlSessionFactoryBuilder().build(is);
+
+        // 获得SqlSession会话对象
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+
+        // 获得Mapper代理对象 不在写实现类
+        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+
+        // 执行查询
+        List<Integer> ids = new ArrayList<>();
+        ids.add(1);
+        ids.add(2);
+        ids.add(3);
+
+        List<User> byList = userMapper.findByList(ids);
+
+        for (User user : byList) {
+            System.out.println(user);
+        }
+
+        // 释放资源
+        sqlSession.close();
+
+    }
+
+    @Test
+    public void findByArray() throws IOException {
+
+        // 加载核心配置文件
+        InputStream is = Resources.getResourceAsStream("SqlMapConfig.xml");
+
+        // 获得SqlSessionFactory工厂对象
+        SqlSessionFactory sqlSessionFactory = new
+                SqlSessionFactoryBuilder().build(is);
+
+        // 获得SqlSession会话对象
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+
+        // 获得Mapper代理对象 不在写实现类
+        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+
+        // 执行查询
+        Integer[] ids = {1,2,4};
+
+        List<User> byList = userMapper.findByArray(ids);
+
+        for (User user : byList) {
+            System.out.println(user);
+        }
+
+        // 释放资源
+        sqlSession.close();
+
+    }
+
 
 
 }

@@ -31,6 +31,18 @@ public interface UserMapper {
     // 添加user，获取返回主键  selectKey
     public void saveUser2(User user);
 
+    // 动态sql where
+    public List<User> findByIdAndUsernameIf(User user);
+
+    // 动态sql set
+    public void updateIf(User user);
+
+    // 动态sql foreach 多值查询 集合
+    public List<User> findByList(List<Integer> ids);
+
+    // 动态sql foreach 多值查询 数组
+    public List<User> findByArray(Integer[] ids);
+
 
 
 }
