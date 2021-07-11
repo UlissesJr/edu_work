@@ -72,4 +72,30 @@ public class OrdersTest {
         sqlSession.close();
     }
 
+    @Test
+    public void findAllWithRole() throws IOException {
+        // 加载核心配置文件
+        InputStream is = Resources.getResourceAsStream("SqlMapConfig.xml");
+
+        // 获得SqlSessionFactory工厂对象
+        SqlSessionFactory sqlSessionFactory = new
+                SqlSessionFactoryBuilder().build(is);
+
+        // 获得SqlSession会话对象
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+
+        // 获得Mapper代理对象 不在写实现类
+        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+
+        // 执行查询
+        List<User> allWithOrders = userMapper.findAllWithRole();
+
+        for (User user : allWithOrders) {
+            System.out.println(user);
+        }
+
+        // 释放资源
+        sqlSession.close();
+    }
+
 }

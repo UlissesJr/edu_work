@@ -17,8 +17,10 @@ public class User {
     private String sex;
     private String address;
 
-    // 表示多方关系：集合，代表了当前用户所具有的订单列表
+    // 表示多方关系：集合，代表了当前用户所具有的订单列表  user为1 order为多 所以为List<Orders>
     private List<Orders> ordersList;
+
+    private List<Role> roleList;
 
     public Integer getId() {
         return id;
@@ -68,6 +70,14 @@ public class User {
         this.ordersList = ordersList;
     }
 
+    public List<Role> getRoleList() {
+        return roleList;
+    }
+
+    public void setRoleList(List<Role> roleList) {
+        this.roleList = roleList;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -77,7 +87,7 @@ public class User {
                 ", sex='" + sex + '\'' +
                 ", address='" + address + '\'' +
                 ", ordersList=" + ordersList +
+                ", roleList=" + roleList +
                 '}';
     }
-
 }

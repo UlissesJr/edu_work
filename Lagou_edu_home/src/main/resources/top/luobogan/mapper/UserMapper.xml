@@ -49,6 +49,7 @@
         <result property="sex" column="sex"/>
         <result property="address" column="address"/>
 
+        <!--  注意collections是关键  -->
         <collection property="ordersList" ofType="top.luobogan.pojo.Orders">
             <!--  这里给Orders表中的id起了别名叫oid，因此column为oid  -->
             <id property="id" column="oid"/>
@@ -196,9 +197,27 @@
     </select>
 
 
+    <resultMap id="userRoleMap" type="top.luobogan.pojo.User">
+        <id property="id" column="id"/>
+        <result property="username" column="username"/>
+        <result property="birthday" column="birthday"/>
+        <result property="sex" column="sex"/>
+        <result property="address" column="address"/>
+
+        <collection property="roleList" ofType="top.luobogan.pojo.Role">
+            <id property="id" column="rid"/>
+            <result property="rolename" column="rolename"/>
+            <result property="roleDesc" column="roleDesc"/>
+        </collection>
 
 
+    </resultMap>
+    <!--  多对多关联查询：查询所有用户以及用户对应的角色  -->
+    <select id="findAllWithRole" resultMap="userRoleMap">
+        select u.*, r.id rid, r.roleDesc, r.rolename from user u
+                        left join sys_user_role ur ON u.id = ur.userid
+                        left join sys_role r ON ur.roleid = r.id
 
-
+    </select>
 
 </mapper>
