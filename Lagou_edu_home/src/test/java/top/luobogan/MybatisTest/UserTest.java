@@ -256,5 +256,33 @@ public class UserTest {
 
     }
 
+    @Test
+    public void findByUsername() throws IOException {
+
+        // 加载核心配置文件
+        InputStream is = Resources.getResourceAsStream("SqlMapConfig.xml");
+
+        // 获得SqlSessionFactory工厂对象
+        SqlSessionFactory sqlSessionFactory = new
+                SqlSessionFactoryBuilder().build(is);
+
+        // 获得SqlSession会话对象
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+
+        // 获得Mapper代理对象 不在写实现类
+        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+
+        // 执行查询
+        List<User> byUsername = userMapper.findByUsername("%子%");
+
+        for (User user : byUsername) {
+            System.out.println(user);
+        }
+
+        // 释放资源
+        sqlSession.close();
+
+    }
+
 
 }

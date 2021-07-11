@@ -3,6 +3,19 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
+    <!--    ${} 与 #{} 区别【笔试题】-->
+    <!--    #{} :表示一个占位符号-->
+    <!--    通过#{} 可以实现preparedStatement向占位符中设置值，自动进行java类型和jdbc类型转换，#-->
+    <!--    {}可以有效防止sql注入。-->
+    <!--    #{} 可以接收简单类型值或pojo属性值。-->
+    <!--    如果parameterType传输单个简单类型值， #{} 括号中名称随便写。-->
+    <!--    ${} :表示拼接sql串-->
+    <!--    通过${} 可以将parameterType 传入的内容拼接在sql中且不进行jdbc类型转换，会出现sql注入-->
+    <!--    问题。-->
+    <!--    ${} 可以接收简单类型值或pojo属性值。-->
+    <!--    如果parameterType传输单个简单类型值， ${} 括号中只能是value。-->
+    <!--    补充：TextSqlNode.java 源码可以证明-->
+
     <!--
         Mapper.xml映射文件中的namespace与mapper接口的全限定名相同
         Mapper接口方法名和Mapper.xml映射文件中定义的每个statement的id相同
@@ -43,9 +56,24 @@
         select * from user where id = #{id} and username = #{username}
     </select>
 
-    <!--  多条件查询方式三： -->
+    <!--  多条件查询方式三：推荐使用，传入参数为user实体 -->
     <select id="findByIdAndUsername3" resultMap="userResultMap" parameterType="user">
         select * from user where id = #{id} and username = #{username}
     </select>
+
+    <!--  模糊查询方式一：因为传入类型为基本数据类型且个数只有一个，所以#{}里面的值可以随便写 -->
+<!--    <select id="findByUsername" resultMap="userResultMap" parameterType="String">-->
+            <!--  #{} 在Mybatis中代表占位符，引用参数值的时候会自动的添加''  -->
+<!--        select * from user where username like #{username}-->
+<!--    </select>  -->
+
+    <!--  模糊查询方式二： -->
+    <select id="findByUsername" resultMap="userResultMap" parameterType="String">
+        <!--  parameterType 为基本数据类型或者String类型的时候 ${}里面的值只能写value -->
+        <!--  ${} 代表SQL原样拼接 不会自动添加''   -->
+        select * from user where username like '${value}'
+    </select>
+
+
 
 </mapper>

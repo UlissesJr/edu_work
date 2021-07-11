@@ -22,4 +22,8 @@ public interface UserMapper {
     // 多条件查询推荐使用该种方式
     public User findByIdAndUsername3(User user);
 
+    // 模糊查询
+    public List<User> findByUsername(String username);
+
+
 }
