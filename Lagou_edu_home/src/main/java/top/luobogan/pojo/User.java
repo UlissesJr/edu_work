@@ -1,6 +1,9 @@
 package top.luobogan.pojo;
 
+import com.mysql.cj.x.protobuf.MysqlxCrud;
+
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by LuoboGan
@@ -13,6 +16,9 @@ public class User {
     private Date birthday;
     private String sex;
     private String address;
+
+    // 表示多方关系：集合，代表了当前用户所具有的订单列表
+    private List<Orders> ordersList;
 
     public Integer getId() {
         return id;
@@ -54,6 +60,14 @@ public class User {
         this.address = address;
     }
 
+    public List<Orders> getOrdersList() {
+        return ordersList;
+    }
+
+    public void setOrdersList(List<Orders> ordersList) {
+        this.ordersList = ordersList;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -62,6 +76,8 @@ public class User {
                 ", birthday=" + birthday +
                 ", sex='" + sex + '\'' +
                 ", address='" + address + '\'' +
+                ", ordersList=" + ordersList +
                 '}';
     }
+
 }

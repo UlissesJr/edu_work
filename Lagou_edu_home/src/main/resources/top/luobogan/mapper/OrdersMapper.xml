@@ -34,8 +34,4 @@
         select * from orders o left join user u on o.uid = u.id
     </select>
 
-    <select id="findAllWithOrders" resultMap="ordersUserMap">
-        select * from orders o right join user u on o.uid = u.id
-    </select>
-
 </mapper>

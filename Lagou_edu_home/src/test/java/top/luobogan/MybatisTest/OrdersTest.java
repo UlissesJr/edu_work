@@ -59,13 +59,13 @@ public class OrdersTest {
         SqlSession sqlSession = sqlSessionFactory.openSession();
 
         // 获得Mapper代理对象 不在写实现类
-        OrdersMapper ordersMapper = sqlSession.getMapper(OrdersMapper.class);
+        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
 
         // 执行查询
-        List<Orders> allWithUser = ordersMapper.findAllWithOrders();
+        List<User> allWithOrders = userMapper.findAllWithOrders();
 
-        for (Orders order : allWithUser) {
-            System.out.println(order);
+        for (User user : allWithOrders) {
+            System.out.println(user);
         }
 
         // 释放资源

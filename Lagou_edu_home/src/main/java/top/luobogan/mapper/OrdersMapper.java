@@ -11,10 +11,7 @@ public interface OrdersMapper {
      */
     public List<Orders> findAllWithUser();
 
-    /*
-    一对多关联查询：查询所有用户，与此同时还要查询出每个用户拥有的订单信息
-     */
-    public List<Orders> findAllWithOrders();
+
 
 
 }

@@ -42,6 +42,22 @@
         <result property="address" column="address"/>
     </resultMap>
 
+    <resultMap id="ordersUserMap" type="top.luobogan.pojo.User">
+        <id property="id" column="id"/>
+        <result property="username" column="username"/>
+        <result property="birthday" column="birthday"/>
+        <result property="sex" column="sex"/>
+        <result property="address" column="address"/>
+
+        <collection property="ordersList" ofType="top.luobogan.pojo.Orders">
+            <!--  这里给Orders表中的id起了别名叫oid，因此column为oid  -->
+            <id property="id" column="oid"/>
+            <result property="ordertime" column="ordertime"/>
+            <result property="total" column="total"/>
+            <result property="uid" column="uid"/>
+        </collection>
+    </resultMap>
+
     <select id="findAllResultMap"  resultMap="userResultMap">
         select * from user
     </select>
@@ -173,6 +189,10 @@
                 #{id}
             </foreach>
         </where>
+    </select>
+
+    <select id="findAllWithOrders" resultMap="ordersUserMap">
+        select u.*, o.id oid, o.ordertime, o.total, o.uid from orders o right join user u on o.uid = u.id
     </select>
 
 

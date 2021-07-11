@@ -1,6 +1,7 @@
 package top.luobogan.mapper;
 
 import org.apache.ibatis.annotations.Param;
+import top.luobogan.pojo.Orders;
 import top.luobogan.pojo.User;
 
 import java.util.List;
@@ -43,6 +44,10 @@ public interface UserMapper {
     // 动态sql foreach 多值查询 数组
     public List<User> findByArray(Integer[] ids);
 
+    /*
+    一对多关联查询：查询所有用户，与此同时还要查询出每个用户拥有的订单信息
+     */
+    public List<User> findAllWithOrders();
 
 
 }
