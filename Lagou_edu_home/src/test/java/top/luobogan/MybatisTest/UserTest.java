@@ -176,5 +176,85 @@ public class UserTest {
 
     }
 
+    @Test
+    public void testfindByIdAndUsername() throws IOException {
+
+        // 加载核心配置文件
+        InputStream is = Resources.getResourceAsStream("SqlMapConfig.xml");
+
+        // 获得SqlSessionFactory工厂对象
+        SqlSessionFactory sqlSessionFactory = new
+                SqlSessionFactoryBuilder().build(is);
+
+        // 获得SqlSession会话对象
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+
+        // 获得Mapper代理对象 不在写实现类
+        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+
+        // 执行查询
+        User user = userMapper.findByIdAndUsername(1,"子慕");
+
+        System.out.println(user);
+
+        // 释放资源
+        sqlSession.close();
+
+    }
+
+    @Test
+    public void testfindByIdAndUsername2() throws IOException {
+
+        // 加载核心配置文件
+        InputStream is = Resources.getResourceAsStream("SqlMapConfig.xml");
+
+        // 获得SqlSessionFactory工厂对象
+        SqlSessionFactory sqlSessionFactory = new
+                SqlSessionFactoryBuilder().build(is);
+
+        // 获得SqlSession会话对象
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+
+        // 获得Mapper代理对象 不在写实现类
+        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+
+        // 执行查询
+        User user = userMapper.findByIdAndUsername2(1,"子慕");
+
+        System.out.println(user);
+
+        // 释放资源
+        sqlSession.close();
+
+    }
+
+    @Test
+    public void testfindByIdAndUsername3() throws IOException {
+
+        // 加载核心配置文件
+        InputStream is = Resources.getResourceAsStream("SqlMapConfig.xml");
+
+        // 获得SqlSessionFactory工厂对象
+        SqlSessionFactory sqlSessionFactory = new
+                SqlSessionFactoryBuilder().build(is);
+
+        // 获得SqlSession会话对象
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+
+        // 获得Mapper代理对象 不在写实现类
+        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+
+        // 执行查询
+        User user1 = new User();
+        user1.setId(1);
+        user1.setUsername("子慕");
+        User user = userMapper.findByIdAndUsername3(user1);
+        System.out.println(user);
+
+        // 释放资源
+        sqlSession.close();
+
+    }
+
 
 }

@@ -11,7 +11,7 @@
     -->
 <mapper namespace="top.luobogan.mapper.UserMapper">
 
-    <!--  根据id查询用户  resultType使用全限定类名，起了别名的话可以使用别名  -->
+    <!--  根据id查询用户  resultType使用全限定类名，起了别名的话可以使用别名  #{id}这里的id可以随便起名    -->
     <select id="findUserById" parameterType="int" resultType="top.luobogan.pojo.User">
         select * from user where id = #{id}
     </select>
@@ -31,6 +31,21 @@
 
     <select id="findAllResultMap"  resultMap="userResultMap">
         select * from user
+    </select>
+
+    <!--  多条件查询方式一：使用 #{arg0}-#{argn} 或者 #{param1}-#{paramn} 获取参数  这里的parameterType可以不用配置 -->
+    <select id="findByIdAndUsername" resultMap="userResultMap">
+        select * from user where id = #{arg0} and username = #{arg1}
+    </select>
+
+    <!--  多条件查询方式二：使用 @param() 注解 -->
+    <select id="findByIdAndUsername2" resultMap="userResultMap">
+        select * from user where id = #{id} and username = #{username}
+    </select>
+
+    <!--  多条件查询方式三： -->
+    <select id="findByIdAndUsername3" resultMap="userResultMap" parameterType="user">
+        select * from user where id = #{id} and username = #{username}
     </select>
 
 </mapper>
