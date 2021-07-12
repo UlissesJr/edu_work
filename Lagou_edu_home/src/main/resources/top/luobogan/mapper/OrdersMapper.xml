@@ -50,7 +50,7 @@
         <result property="total" column="total"/>
         <result property="uid" column="uid"/>
 
-        <!--  问题：1. 怎么去执行第二条SQL  2.如何执行第二条SQL的时候，把uid作为参数进行传递  -->
+        <!--  问题：1. 怎么去执行第二条SQL -select 2.如何执行第二条SQL的时候，把uid作为参数进行传递 column里面的值即为要传递的属性 -->
         <association property="user" javaType="top.luobogan.pojo.User" select="top.luobogan.mapper.UserMapper.findById"
                 column="uid">
             <id property="id" column="uid"/>
@@ -62,6 +62,11 @@
     </resultMap>
     <select id="findAllWithUser1On1" resultMap="ordersUserMap2">
         select * from orders
+    </select>
+
+    <!--  一对多嵌套查询 第二个sql  -->
+    <select id="findByUid" parameterType="int" resultType="orders">
+        SELECT * FROM orders where uid = #{uid}
     </select>
 
 

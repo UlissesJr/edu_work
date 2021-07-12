@@ -225,5 +225,20 @@
         select * from user where id = #{id}
     </select>
 
+    <!--  一对多嵌套查询 查询用户订单信息  区别在于 collection -->
+    <resultMap id="userMap" type="user">
+        <id column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="birthday" property="birthday"/>
+        <result column="sex" property="sex"/>
+        <result column="address" property="address"/>
+        <!--根据用户id，查询订单表-->
+        <collection property="ordersList" column="id" ofType="orders"
+                    select="top.luobogan.mapper.OrdersMapper.findByUid">
+        </collection>
+    </resultMap>
+    <select id="findAllWithOrder1vsN" resultMap="userMap">
+        SELECT * FROM user
+    </select>
 
 </mapper>

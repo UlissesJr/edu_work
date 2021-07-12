@@ -59,4 +59,9 @@ public interface UserMapper {
      */
     public User findById(Integer id);
 
+    /*
+        1vsN 嵌套查询
+     */
+    public List<User> findAllWithOrder1vsN();
+
 }

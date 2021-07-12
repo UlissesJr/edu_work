@@ -17,6 +17,11 @@ public interface OrdersMapper {
      */
     public List<Orders> findAllWithUser1On1();
 
+    /*
+        一对多嵌套查询
+     */
+    public List<Orders> findByUid(Integer uid);
+
 
 
 
