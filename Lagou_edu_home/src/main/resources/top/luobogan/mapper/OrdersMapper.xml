@@ -5,6 +5,14 @@
 
 <mapper namespace="top.luobogan.mapper.OrdersMapper">
 
+
+    <!--
+        多对一（一对一）配置：使用<resultMap>+<association>做配置
+        一对多配置：使用<resultMap>+<collection>做配置
+        多对多配置：使用<resultMap>+<collection>做配置
+        多对多的配置跟一对多很相似，难度在于SQL语句的编写。
+    -->
+
     <!--
         对一关联查询：查询所有订单，与此同时还要查询出每个订单所属的用户信息
         因为是关联查询，所以我们应该使用 resultMap
@@ -33,5 +41,28 @@
     <select id="findAllWithUser" resultMap="ordersUserMap">
         select * from orders o left join user u on o.uid = u.id
     </select>
+
+    <!--  一对一嵌套查询  -->
+    <resultMap id="ordersUserMap2" type="top.luobogan.pojo.Orders">
+        <!--  先设置主键  -->
+        <id property="id" column="id"/>
+        <result property="ordertime" column="ordertime"/>
+        <result property="total" column="total"/>
+        <result property="uid" column="uid"/>
+
+        <!--  问题：1. 怎么去执行第二条SQL  2.如何执行第二条SQL的时候，把uid作为参数进行传递  -->
+        <association property="user" javaType="top.luobogan.pojo.User" select="top.luobogan.mapper.UserMapper.findById"
+                column="uid">
+            <id property="id" column="uid"/>
+            <result property="username" column="username"/>
+            <result property="birthday" column="birthday"/>
+            <result property="sex" column="sex"/>
+            <result property="address" column="address"/>
+        </association>
+    </resultMap>
+    <select id="findAllWithUser1On1" resultMap="ordersUserMap2">
+        select * from orders
+    </select>
+
 
 </mapper>

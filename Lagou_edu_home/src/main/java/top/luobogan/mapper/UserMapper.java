@@ -54,5 +54,9 @@ public interface UserMapper {
      */
     public List<User> findAllWithRole();
 
+    /*
+        根据id查询用户
+     */
+    public User findById(Integer id);
 
 }

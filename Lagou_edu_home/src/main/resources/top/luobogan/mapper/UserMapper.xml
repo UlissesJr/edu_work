@@ -220,4 +220,10 @@
 
     </select>
 
+    <!--  根据ID查询用户  -->
+    <select id="findById" resultType="user" parameterType="int">
+        select * from user where id = #{id}
+    </select>
+
+
 </mapper>
