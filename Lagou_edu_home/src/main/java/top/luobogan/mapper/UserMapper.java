@@ -64,4 +64,10 @@ public interface UserMapper {
      */
     public List<User> findAllWithOrder1vsN();
 
+    /*
+        多对多嵌套查询
+     */
+    public List<User> findAllWithRoleNvsN();
+
+
 }

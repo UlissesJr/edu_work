@@ -241,4 +241,19 @@
         SELECT * FROM user
     </select>
 
+    <!--  多对多嵌套查询 findAllWithRoleNvsN -->
+    <resultMap id="userMapNvsN" type="user">
+        <id column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="birthday" property="birthday"/>
+        <result column="sex" property="sex"/>
+        <result column="address" property="address"/>
+        <!--根据用户id，查询订单表-->
+        <collection property="roleList" column="id" ofType="role"
+                    select="top.luobogan.mapper.RoleMapper.findRoleById">
+        </collection>
+    </resultMap>
+    <select id="findAllWithRoleNvsN" resultMap="userMapNvsN" >
+        select * from user
+    </select>
 </mapper>

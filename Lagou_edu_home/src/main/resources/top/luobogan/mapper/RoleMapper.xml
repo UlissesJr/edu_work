@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="top.luobogan.mapper.RoleMapper">
+
+    <!--
+        总结：
+        1对1 ： resultMap 为 association
+        1对N ： resultMap 为 collection
+        N对N :  目前没发现跟 1对N有什么区别  也就SQL不一样
+
+    -->
+
+    <!--  多堆多嵌套映射 第二个SQL  -->
+    <select id="findRoleById" resultType="role" parameterType="int">
+        select * from sys_user_role ur Inner join sys_role r ON ur.roleid = r.id
+        where ur.userid = #{uid}
+    </select>
+
+</mapper>
