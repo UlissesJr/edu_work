@@ -1,9 +1,8 @@
 package top.luobogan.mapper;
 
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.mapping.FetchType;
+import top.luobogan.pojo.Orders;
 import top.luobogan.pojo.User;
 
 import java.util.List;
@@ -31,6 +30,22 @@ public interface UserMapperAnno {
      */
     @Select("select * from user where id = #{uid}")
     public User findById(Integer uid);
+
+    /*
+        一对多查询，查询用户并且查询用户拥有的订单
+     */
+    @Select("select * from user")
+    @Results({
+            @Result(id = true, column = "id", property = "id"),
+            @Result(column = "username", property = "username"),
+            @Result(column = "birthday", property = "birthday"),
+            @Result(column = "sex", property = "sex"),
+            @Result(column = "address", property = "address"),
+            @Result(property = "ordersList", javaType = List.class, // 注意这里为List
+                    column = "id", many = @Many(select =
+                    "top.luobogan.mapper.OrderMapperAnno.findByUid", fetchType = FetchType.EAGER))
+    })
+    public List<User> findAllWithOrder();
 
 
 

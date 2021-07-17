@@ -6,8 +6,11 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import top.luobogan.mapper.UserMapper;
+import top.luobogan.mapper.UserMapperAnno;
 import top.luobogan.pojo.User;
 
 import java.io.IOException;
@@ -22,18 +25,32 @@ import java.util.List;
  */
 public class UserTest {
 
-    @Test
-    public void testFindAll() throws Exception {
+    private SqlSessionFactory sqlSessionFactory;
 
+    private SqlSession sqlSession;
+
+
+    @BeforeEach
+    public void _init() throws IOException {
         // 加载核心配置文件
         InputStream is = Resources.getResourceAsStream("SqlMapConfig.xml");
 
-        // 获取SqlSessionFactory工厂对象
-        SqlSessionFactory sqlSessionFactory = new
+        // 获得SqlSessionFactory工厂对象
+        sqlSessionFactory = new
                 SqlSessionFactoryBuilder().build(is);
 
-        // 获取SqlSession会话对象
-        SqlSession sqlSession = sqlSessionFactory.openSession();
+        // 获得SqlSession会话对象
+        sqlSession = sqlSessionFactory.openSession();
+    }
+
+    @AfterEach
+    public void closeSqlSession(){
+        // 释放资源
+        sqlSession.close();
+    }
+
+    @Test
+    public void testFindAll() throws Exception {
 
         // 执行sql
         List<User> list = sqlSession.selectList("UserMapper.findAll");
@@ -41,22 +58,10 @@ public class UserTest {
             System.out.println(user);
         }
 
-        // 释放资源
-        sqlSession.close();
     }
 
     @Test
     public void testSave() throws Exception {
-
-        // 加载核心配置文件
-        InputStream is = Resources.getResourceAsStream("SqlMapConfig.xml");
-
-        // 获取SqlSessionFactory工厂对象
-        SqlSessionFactory sqlSessionFactory = new
-                SqlSessionFactoryBuilder().build(is);
-
-        // 获取SqlSession会话对象
-        SqlSession sqlSession = sqlSessionFactory.openSession();
 
         // 执行sql
         User user = new User();
@@ -69,22 +74,10 @@ public class UserTest {
         // DML语句，手动提交事务
         sqlSession.commit();
 
-        // 释放资源
-        sqlSession.close();
     }
 
     @Test
     public void testUpdate() throws Exception {
-
-        // 加载核心配置文件
-        InputStream is = Resources.getResourceAsStream("SqlMapConfig.xml");
-
-        // 获取SqlSessionFactory工厂对象
-        SqlSessionFactory sqlSessionFactory = new
-                SqlSessionFactoryBuilder().build(is);
-
-        // 获取SqlSession会话对象
-        SqlSession sqlSession = sqlSessionFactory.openSession();
 
         // 执行sql
         User user = new User();
@@ -98,22 +91,10 @@ public class UserTest {
         // DML语句，手动提交事务
         sqlSession.commit();
 
-        // 释放资源
-        sqlSession.close();
     }
 
     @Test
     public void testDelete() throws Exception {
-
-        // 加载核心配置文件
-        InputStream is = Resources.getResourceAsStream("SqlMapConfig.xml");
-
-        // 获取SqlSessionFactory工厂对象
-        SqlSessionFactory sqlSessionFactory = new
-                SqlSessionFactoryBuilder().build(is);
-
-        // 获取SqlSession会话对象
-        SqlSession sqlSession = sqlSessionFactory.openSession();
 
         // 执行sql
         sqlSession.delete("UserMapper.delete", 3);
@@ -121,22 +102,10 @@ public class UserTest {
         // DML语句，手动提交事务
         sqlSession.commit();
 
-        // 释放资源
-        sqlSession.close();
     }
 
     @Test
     public void testMapperFindAllById() throws IOException {
-
-        // 加载核心配置文件
-        InputStream is = Resources.getResourceAsStream("SqlMapConfig.xml");
-
-        // 获得SqlSessionFactory工厂对象
-        SqlSessionFactory sqlSessionFactory = new
-                SqlSessionFactoryBuilder().build(is);
-
-        // 获得SqlSession会话对象
-        SqlSession sqlSession = sqlSessionFactory.openSession();
 
         // 获得Mapper代理对象 不在写实现类
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
@@ -146,23 +115,10 @@ public class UserTest {
 
         System.out.println(user);
 
-        // 释放资源
-        sqlSession.close();
-
     }
 
     @Test
     public void testMapperFindAll() throws IOException {
-
-        // 加载核心配置文件
-        InputStream is = Resources.getResourceAsStream("SqlMapConfig.xml");
-
-        // 获得SqlSessionFactory工厂对象
-        SqlSessionFactory sqlSessionFactory = new
-                SqlSessionFactoryBuilder().build(is);
-
-        // 获得SqlSession会话对象
-        SqlSession sqlSession = sqlSessionFactory.openSession();
 
         // 获得Mapper代理对象 不在写实现类
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
@@ -174,23 +130,11 @@ public class UserTest {
             System.out.println(user);
         }
 
-        // 释放资源
-        sqlSession.close();
 
     }
 
     @Test
     public void testfindByIdAndUsername() throws IOException {
-
-        // 加载核心配置文件
-        InputStream is = Resources.getResourceAsStream("SqlMapConfig.xml");
-
-        // 获得SqlSessionFactory工厂对象
-        SqlSessionFactory sqlSessionFactory = new
-                SqlSessionFactoryBuilder().build(is);
-
-        // 获得SqlSession会话对象
-        SqlSession sqlSession = sqlSessionFactory.openSession();
 
         // 获得Mapper代理对象 不在写实现类
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
@@ -200,23 +144,10 @@ public class UserTest {
 
         System.out.println(user);
 
-        // 释放资源
-        sqlSession.close();
-
     }
 
     @Test
     public void testfindByIdAndUsername2() throws IOException {
-
-        // 加载核心配置文件
-        InputStream is = Resources.getResourceAsStream("SqlMapConfig.xml");
-
-        // 获得SqlSessionFactory工厂对象
-        SqlSessionFactory sqlSessionFactory = new
-                SqlSessionFactoryBuilder().build(is);
-
-        // 获得SqlSession会话对象
-        SqlSession sqlSession = sqlSessionFactory.openSession();
 
         // 获得Mapper代理对象 不在写实现类
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
@@ -226,23 +157,10 @@ public class UserTest {
 
         System.out.println(user);
 
-        // 释放资源
-        sqlSession.close();
-
     }
 
     @Test
     public void testfindByIdAndUsername3() throws IOException {
-
-        // 加载核心配置文件
-        InputStream is = Resources.getResourceAsStream("SqlMapConfig.xml");
-
-        // 获得SqlSessionFactory工厂对象
-        SqlSessionFactory sqlSessionFactory = new
-                SqlSessionFactoryBuilder().build(is);
-
-        // 获得SqlSession会话对象
-        SqlSession sqlSession = sqlSessionFactory.openSession();
 
         // 获得Mapper代理对象 不在写实现类
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
@@ -254,23 +172,10 @@ public class UserTest {
         User user = userMapper.findByIdAndUsername3(user1);
         System.out.println(user);
 
-        // 释放资源
-        sqlSession.close();
-
     }
 
     @Test
     public void findByUsername() throws IOException {
-
-        // 加载核心配置文件
-        InputStream is = Resources.getResourceAsStream("SqlMapConfig.xml");
-
-        // 获得SqlSessionFactory工厂对象
-        SqlSessionFactory sqlSessionFactory = new
-                SqlSessionFactoryBuilder().build(is);
-
-        // 获得SqlSession会话对象
-        SqlSession sqlSession = sqlSessionFactory.openSession();
 
         // 获得Mapper代理对象 不在写实现类
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
@@ -282,23 +187,10 @@ public class UserTest {
             System.out.println(user);
         }
 
-        // 释放资源
-        sqlSession.close();
-
     }
 
     @Test
     public void saveUser() throws IOException {
-
-        // 加载核心配置文件
-        InputStream is = Resources.getResourceAsStream("SqlMapConfig.xml");
-
-        // 获得SqlSessionFactory工厂对象
-        SqlSessionFactory sqlSessionFactory = new
-                SqlSessionFactoryBuilder().build(is);
-
-        // 获得SqlSession会话对象
-        SqlSession sqlSession = sqlSessionFactory.openSession();
 
         // 获得Mapper代理对象 不在写实现类
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
@@ -316,23 +208,10 @@ public class UserTest {
 
         sqlSession.commit();
 
-        // 释放资源
-        sqlSession.close();
-
     }
 
     @Test
     public void saveUser2() throws IOException {
-
-        // 加载核心配置文件
-        InputStream is = Resources.getResourceAsStream("SqlMapConfig.xml");
-
-        // 获得SqlSessionFactory工厂对象
-        SqlSessionFactory sqlSessionFactory = new
-                SqlSessionFactoryBuilder().build(is);
-
-        // 获得SqlSession会话对象
-        SqlSession sqlSession = sqlSessionFactory.openSession();
 
         // 获得Mapper代理对象 不在写实现类
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
@@ -350,23 +229,10 @@ public class UserTest {
 
         sqlSession.commit();
 
-        // 释放资源
-        sqlSession.close();
-
     }
 
     @Test
     public void findByIdAndUsernameIf() throws IOException {
-
-        // 加载核心配置文件
-        InputStream is = Resources.getResourceAsStream("SqlMapConfig.xml");
-
-        // 获得SqlSessionFactory工厂对象
-        SqlSessionFactory sqlSessionFactory = new
-                SqlSessionFactoryBuilder().build(is);
-
-        // 获得SqlSession会话对象
-        SqlSession sqlSession = sqlSessionFactory.openSession();
 
         // 获得Mapper代理对象 不在写实现类
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
@@ -380,23 +246,10 @@ public class UserTest {
             System.out.println(user);
         }
 
-        // 释放资源
-        sqlSession.close();
-
     }
 
     @Test
     public void updateIf() throws IOException {
-
-        // 加载核心配置文件
-        InputStream is = Resources.getResourceAsStream("SqlMapConfig.xml");
-
-        // 获得SqlSessionFactory工厂对象
-        SqlSessionFactory sqlSessionFactory = new
-                SqlSessionFactoryBuilder().build(is);
-
-        // 获得SqlSession会话对象
-        SqlSession sqlSession = sqlSessionFactory.openSession();
 
         // 获得Mapper代理对象 不在写实现类
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
@@ -411,23 +264,10 @@ public class UserTest {
 
         sqlSession.commit();
 
-        // 释放资源
-        sqlSession.close();
-
     }
 
     @Test
     public void findByList() throws IOException {
-
-        // 加载核心配置文件
-        InputStream is = Resources.getResourceAsStream("SqlMapConfig.xml");
-
-        // 获得SqlSessionFactory工厂对象
-        SqlSessionFactory sqlSessionFactory = new
-                SqlSessionFactoryBuilder().build(is);
-
-        // 获得SqlSession会话对象
-        SqlSession sqlSession = sqlSessionFactory.openSession();
 
         // 获得Mapper代理对象 不在写实现类
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
@@ -444,23 +284,10 @@ public class UserTest {
             System.out.println(user);
         }
 
-        // 释放资源
-        sqlSession.close();
-
     }
 
     @Test
     public void findByArray() throws IOException {
-
-        // 加载核心配置文件
-        InputStream is = Resources.getResourceAsStream("SqlMapConfig.xml");
-
-        // 获得SqlSessionFactory工厂对象
-        SqlSessionFactory sqlSessionFactory = new
-                SqlSessionFactoryBuilder().build(is);
-
-        // 获得SqlSession会话对象
-        SqlSession sqlSession = sqlSessionFactory.openSession();
 
         // 获得Mapper代理对象 不在写实现类
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
@@ -474,24 +301,11 @@ public class UserTest {
             System.out.println(user);
         }
 
-        // 释放资源
-        sqlSession.close();
-
     }
 
 
     @Test
     public void findAllPageHelper() throws IOException {
-
-        // 加载核心配置文件
-        InputStream is = Resources.getResourceAsStream("SqlMapConfig.xml");
-
-        // 获得SqlSessionFactory工厂对象
-        SqlSessionFactory sqlSessionFactory = new
-                SqlSessionFactoryBuilder().build(is);
-
-        // 获得SqlSession会话对象
-        SqlSession sqlSession = sqlSessionFactory.openSession();
 
         // 获得Mapper代理对象 不在写实现类
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
@@ -515,24 +329,11 @@ public class UserTest {
         System.out.println("是否第一页："+pageInfo.isIsFirstPage());
         System.out.println("是否最后一页："+pageInfo.isIsLastPage());
 
-        // 释放资源
-        sqlSession.close();
-
     }
 
 
     @Test
     public void findAllWithOrder1vsN() throws IOException {
-
-        // 加载核心配置文件
-        InputStream is = Resources.getResourceAsStream("SqlMapConfig.xml");
-
-        // 获得SqlSessionFactory工厂对象
-        SqlSessionFactory sqlSessionFactory = new
-                SqlSessionFactoryBuilder().build(is);
-
-        // 获得SqlSession会话对象
-        SqlSession sqlSession = sqlSessionFactory.openSession();
 
         // 获得Mapper代理对象 不在写实现类
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
@@ -544,23 +345,10 @@ public class UserTest {
             System.out.println(user);
         }
 
-        // 释放资源
-        sqlSession.close();
-
     }
 
     @Test
     public void findAllWithOrderNvsN() throws IOException {
-
-        // 加载核心配置文件
-        InputStream is = Resources.getResourceAsStream("SqlMapConfig.xml");
-
-        // 获得SqlSessionFactory工厂对象
-        SqlSessionFactory sqlSessionFactory = new
-                SqlSessionFactoryBuilder().build(is);
-
-        // 获得SqlSession会话对象
-        SqlSession sqlSession = sqlSessionFactory.openSession();
 
         // 获得Mapper代理对象 不在写实现类
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
@@ -572,8 +360,22 @@ public class UserTest {
             System.out.println(user);
         }
 
-        // 释放资源
-        sqlSession.close();
+    }
+
+    @Test
+    public void testfindAllWithOrder(){
+
+        // 获得Mapper代理对象 不在写实现类
+        UserMapperAnno userMapperAnno = sqlSession.getMapper(UserMapperAnno.class);
+
+        // 执行查询
+        List<User> allWithOrder = userMapperAnno.findAllWithOrder();
+
+        for(User user : allWithOrder){
+            System.out.println(user);
+        }
+
+
 
     }
 

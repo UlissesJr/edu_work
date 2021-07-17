@@ -21,5 +21,8 @@ public interface OrderMapperAnno {
     })
     public List<Orders> findAllWithUser();
 
+    @Select("select * from orders where uid = #{uid}")
+    public List<Orders> findByUid(Integer uid);
+
 
 }
