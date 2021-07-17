@@ -9,6 +9,11 @@
     -->
     <properties resource="jdbc.properties"/>
 
+    <!--  懒加载  -->
+    <settings>
+        <setting name="lazyLoadingEnabled" value="true"/>
+    </settings>
+
     <!-- 设置别名 -->
     <typeAliases>
         <!-- 方式一：给单个个体起别名 -->
@@ -48,8 +53,6 @@
         <!--  <mapper class="top.luobogan.mapper.UserMapper"></mapper>-->
         <!--  批量加载映射  -->
         <package name="top.luobogan.mapper"/>
-
-
     </mappers>
 
 </configuration>

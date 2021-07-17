@@ -10,6 +10,15 @@ public class Role {
     private String rolename;
     private String roleDesc;
 
+    public Role() {
+    }
+
+    public Role(Integer id, String rolename, String roleDesc) {
+        this.id = id;
+        this.rolename = rolename;
+        this.roleDesc = roleDesc;
+    }
+
     public Integer getId() {
         return id;
     }

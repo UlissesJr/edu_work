@@ -22,6 +22,19 @@ public class User {
 
     private List<Role> roleList;
 
+    public User() {
+    }
+
+    public User(Integer id, String username, Date birthday, String sex, String address, List<Orders> ordersList, List<Role> roleList) {
+        this.id = id;
+        this.username = username;
+        this.birthday = birthday;
+        this.sex = sex;
+        this.address = address;
+        this.ordersList = ordersList;
+        this.roleList = roleList;
+    }
+
     public Integer getId() {
         return id;
     }

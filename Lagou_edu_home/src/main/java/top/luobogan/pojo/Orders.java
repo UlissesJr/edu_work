@@ -1,7 +1,5 @@
 package top.luobogan.pojo;
 
-import java.util.Date;
-
 /**
  * Created by LuoboGan
  * Date:2021/7/11
@@ -15,6 +13,16 @@ public class Orders {
 
     // 为关联查询做准备  orders.uid 为外键  注意为user创建 get set 方法
     private User user;
+
+    private Orders(){};
+
+    public Orders(Integer id, String ordertime, double total, Integer uid, User user) {
+        this.id = id;
+        this.ordertime = ordertime;
+        this.total = total;
+        this.uid = uid;
+        this.user = user;
+    }
 
     public Integer getId() {
         return id;

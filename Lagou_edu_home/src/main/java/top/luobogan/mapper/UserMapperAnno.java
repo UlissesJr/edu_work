@@ -12,7 +12,7 @@ import java.util.List;
     基于注解的方式开发Mybatis
 
  */
-public interface UserMspperAnno {
+public interface UserMapperAnno {
 
     @Select("Select * from user")
     public List<User> findAll();
@@ -25,6 +25,12 @@ public interface UserMspperAnno {
 
     @Delete("delete from user where id = #{id}")
     public void delete(Integer id);
+
+    /*
+        注意这一返回值写错也不可以，之前写Void，一直提示找不到Void对应的构造函数
+     */
+    @Select("select * from user where id = #{uid}")
+    public User findById(Integer uid);
 
 
 
