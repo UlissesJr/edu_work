@@ -9,7 +9,6 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.jupiter.api.Test;
 import top.luobogan.mapper.UserMapper;
 import top.luobogan.pojo.User;
-import top.luobogan.utils.DateUtils;
 
 import java.io.IOException;
 import java.io.InputStream;

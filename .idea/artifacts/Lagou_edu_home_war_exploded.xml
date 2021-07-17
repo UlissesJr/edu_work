@@ -31,6 +31,9 @@
           <element id="library" level="project" name="Maven: org.jetbrains:annotations:21.0.1" />
           <element id="library" level="project" name="Maven: com.github.pagehelper:pagehelper:3.7.5" />
           <element id="library" level="project" name="Maven: com.github.jsqlparser:jsqlparser:0.9.1" />
+          <element id="library" level="project" name="Maven: org.slf4j:slf4j-log4j12:1.7.25" />
+          <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.25" />
+          <element id="library" level="project" name="Maven: log4j:log4j:1.2.17" />
         </element>
       </element>
       <element id="directory" name="META-INF">
