@@ -375,8 +375,19 @@ public class UserTest {
             System.out.println(user);
         }
 
+    }
 
+    @Test
+    public void testNvsN(){
+        // 获得Mapper代理对象 不在写实现类
+        UserMapperAnno userMapperAnno = sqlSession.getMapper(UserMapperAnno.class);
 
+        // 执行查询
+        List<User> allWithOrder = userMapperAnno.findAllWithRole();
+
+        for(User user : allWithOrder){
+            System.out.println(user);
+        }
     }
 
 }

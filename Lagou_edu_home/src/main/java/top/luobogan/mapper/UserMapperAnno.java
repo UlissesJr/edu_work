@@ -47,6 +47,24 @@ public interface UserMapperAnno {
     })
     public List<User> findAllWithOrder();
 
+    /*
+        多对多查询,与一对多相比如要查询在SQL编写上,多了一张中间表
+     */
+    @Select("select * from user")
+    @Results({
+            @Result(id = true, property = "id", column = "id"),
+            @Result(property = "username", column = "username"),
+            @Result(property = "birthday", column = "birthday"),
+            @Result(property = "sex", column = "sex"),
+            @Result(property = "address", column = "address"),
+            @Result(property = "roleList", javaType = List.class,
+            column = "id" , many = @Many(
+                    select = "top.luobogan.mapper.RoleMapperAnno.finbdByUid",
+                    fetchType = FetchType.EAGER
+            ))
+    })
+    public List<User> findAllWithRole();
+
 
 
 }
