@@ -10,11 +10,13 @@
         <outputRelativeToContentRoot value="true" />
         <module name="Lagou_edu_home" />
         <module name="hello_maven" />
+        <module name="Learn_spring" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="8">
       <module name="hello_maven" target="1.8" />
       <module name="Lagou_edu_home" target="1.8" />
+      <module name="Learn_spring" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>

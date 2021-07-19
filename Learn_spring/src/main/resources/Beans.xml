@@ -1,0 +1,5 @@
+<beans>
+    <!--  自定义Bean文件  -->
+    <bean id = "userdao" class = "top.luobogan.dao.impl.UserDaoImpl"/>
+
+</beans>

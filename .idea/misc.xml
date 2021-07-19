@@ -9,6 +9,7 @@
       <list>
         <option value="$PROJECT_DIR$/hello_maven/pom.xml" />
         <option value="$PROJECT_DIR$/Lagou_edu_home/pom.xml" />
+        <option value="$PROJECT_DIR$/Learn_spring/pom.xml" />
       </list>
     </option>
   </component>
