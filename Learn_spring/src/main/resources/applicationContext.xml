@@ -9,7 +9,8 @@ http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <!--  配置依赖注入  -->
     <bean id="userService" class="top.luobogan.service.impl.UserServiceSpringImpl">
-        <constructor-arg index="0" type="top.luobogan.dao.IUserDaoSpring" ref="userDao"/>
+<!--        <constructor-arg index="0" type="top.luobogan.dao.IUserDaoSpring" ref="userDao"/>-->
+        <constructor-arg name="userDaoSpring" ref="userDao"/>
     </bean>
 
 </beans>
