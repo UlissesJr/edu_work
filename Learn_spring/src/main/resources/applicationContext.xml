@@ -5,7 +5,11 @@
 http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <!--  id配置唯一标识，class配置类的全路径（实现类而不是接口）   -->
-    <bean id="userDao" class="top.luobogan.dao.impl.UserDaoSpringImpl"
-    init-method="init" destroy-method="destroy" scope="prototype"/>
+    <bean id="userDao" class="top.luobogan.dao.impl.UserDaoSpringImpl"/>
+
+    <!--  配置依赖注入  -->
+    <bean id="userService" class="top.luobogan.service.impl.UserServiceSpringImpl">
+        <constructor-arg index="0" type="top.luobogan.dao.IUserDaoSpring" ref="userDao"/>
+    </bean>
 
 </beans>
