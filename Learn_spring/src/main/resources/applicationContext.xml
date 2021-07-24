@@ -1,16 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-http://www.springframework.org/schema/beans/spring-beans.xsd">
-
-    <!--  id配置唯一标识，class配置类的全路径（实现类而不是接口）   -->
-    <bean id="userDao" class="top.luobogan.dao.impl.UserDaoSpringImpl"/>
-
-    <!--  配置依赖注入  -->
-    <bean id="userService" class="top.luobogan.service.impl.UserServiceSpringImpl">
-<!--        <constructor-arg index="0" type="top.luobogan.dao.IUserDaoSpring" ref="userDao"/>-->
-        <constructor-arg name="userDaoSpring" ref="userDao"/>
-    </bean>
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
 
 </beans>

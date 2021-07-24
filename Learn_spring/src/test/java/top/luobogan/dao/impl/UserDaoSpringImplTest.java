@@ -4,13 +4,17 @@ import org.junit.Test;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.core.io.ClassPathResource;
+import top.luobogan.config.SpringConfig;
 import top.luobogan.dao.IUserDaoSpring;
 
 import static org.junit.Assert.*;
 
 public class UserDaoSpringImplTest {
+
+
 
     @Test
     public void testSaveSpring(){
@@ -56,6 +60,18 @@ public class UserDaoSpringImplTest {
                         ClassPathResource("applicationContext.xml"));
         IUserDaoSpring userDaoSpring = (IUserDaoSpring) beanFactory.getBean("userDao");
         userDaoSpring.save();
+    }
+
+    /*
+        测试纯注解方式的Spring
+     */
+    @Test
+    public void testAnno(){
+
+        AnnotationConfigApplicationContext annotationConfigApplicationContext =
+                new AnnotationConfigApplicationContext(SpringConfig.class);
+        Object userDao = annotationConfigApplicationContext.getBean("userDao");
+        System.out.println(userDao);
     }
 
 
