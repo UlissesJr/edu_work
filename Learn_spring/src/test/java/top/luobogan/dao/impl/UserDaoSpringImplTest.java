@@ -1,19 +1,27 @@
 package top.luobogan.dao.impl;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import top.luobogan.config.SpringConfig;
 import top.luobogan.dao.IUserDaoSpring;
 
-import static org.junit.Assert.*;
-
+@RunWith(SpringJUnit4ClassRunner.class)
+// RunWith指定Junit的运行环境，SpringJUnit4ClassRunner是Spring提供的作为Junit运行环境的一个类
+//@ContextConfiguration(value = {"classpath:applicationContext.xml"}) 加载spring核心配置文件
+@ContextConfiguration(classes = {SpringConfig.class})
 public class UserDaoSpringImplTest {
 
+    @Autowired
+    private IUserDaoSpring userDaoSpring;
 
 
     @Test
@@ -39,13 +47,8 @@ public class UserDaoSpringImplTest {
             3. <T> T getBean(String name,Class<T> requiredType);
              根据Bean的id和类型获得Bean实例，解决容器中相同类型Bean有多个情况。
          */
-        ApplicationContext applicationContext = new
-                ClassPathXmlApplicationContext("applicationContext.xml");
-        IUserDaoSpring userDaoSpring = (IUserDaoSpring) applicationContext.getBean("userDao");
-        IUserDaoSpring userDaoSpring2 = (IUserDaoSpring) applicationContext.getBean("userDao");
         // scope 选择 prototype，初始化方法执行了两次
         userDaoSpring.save();
-        userDaoSpring2.save();
 
     }
 
@@ -55,10 +58,6 @@ public class UserDaoSpringImplTest {
             BeanFactory是 IOC 容器的核心接口，它定义了IOC的基本功能。
             特点：在第一次调用getBean()方法时，创建指定对象的实例.
          */
-        BeanFactory beanFactory =
-                new XmlBeanFactory(new
-                        ClassPathResource("applicationContext.xml"));
-        IUserDaoSpring userDaoSpring = (IUserDaoSpring) beanFactory.getBean("userDao");
         userDaoSpring.save();
     }
 
@@ -68,10 +67,8 @@ public class UserDaoSpringImplTest {
     @Test
     public void testAnno(){
 
-        AnnotationConfigApplicationContext annotationConfigApplicationContext =
-                new AnnotationConfigApplicationContext(SpringConfig.class);
-        Object userDao = annotationConfigApplicationContext.getBean("userDao");
-        System.out.println(userDao);
+        System.out.println(userDaoSpring);
+
     }
 
 

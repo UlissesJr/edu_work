@@ -29,6 +29,12 @@
             <artifactId>junit</artifactId>
             <version>4.12</version>
         </dependency>
+        <!--此处需要注意的是，spring5 及以上版本要求 junit 的版本必须是 4.12 及以上-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>5.1.5.RELEASE</version>
+        </dependency>
         <dependency>
             <groupId>luobogan.top</groupId>
             <artifactId>Lagou_edu_home</artifactId>
