@@ -4,6 +4,7 @@ import org.apache.commons.dbutils.QueryRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import top.luobogan.dao.AccountDao;
+import top.luobogan.utils.ConnectionUtils;
 
 import java.sql.SQLException;
 
@@ -17,6 +18,9 @@ public class AccountDaoImpl implements AccountDao {
     @Autowired
     private QueryRunner queryRunner;
 
+    @Autowired
+    private ConnectionUtils connectionUtils;
+
     /*
         转出操作
      */
@@ -24,7 +28,7 @@ public class AccountDaoImpl implements AccountDao {
 
         String sql = "update account set money = money - ? where name = ? ;";
         try {
-            queryRunner.update(sql,money,outUser);
+            queryRunner.update(connectionUtils.getThreadConnection(),sql,money,outUser);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -38,7 +42,7 @@ public class AccountDaoImpl implements AccountDao {
 
         String sql = "update account set money = money + ? where name = ? ;";
         try {
-            queryRunner.update(sql,money,inUser);
+            queryRunner.update(connectionUtils.getThreadConnection(),sql,money,inUser);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
