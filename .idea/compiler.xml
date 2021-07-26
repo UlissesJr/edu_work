@@ -18,7 +18,7 @@
       <module name="hello_maven" target="1.8" />
       <module name="Lagou_edu_home" target="1.8" />
       <module name="Learn_spring" target="1.5" />
-      <module name="Spring_transfer_AOP" target="1.5" />
+      <module name="Spring_transfer_AOP" target="6" />
     </bytecodeTargetLevel>
   </component>
 </project>
