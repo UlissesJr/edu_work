@@ -2,10 +2,7 @@ package top.luobogan.config;
 
 import org.apache.commons.dbutils.QueryRunner;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.*;
 
 import javax.sql.DataSource;
 
@@ -16,6 +13,7 @@ import javax.sql.DataSource;
 @Configuration
 @ComponentScan("top.luobogan")
 @Import(DatasourceConfig.class)
+@EnableAspectJAutoProxy //替代 <aop:aspectj-autoproxy />
 public class SpringConfig {
 
     @Bean
