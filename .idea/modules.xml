@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Lagou_edu_home/Lagou_edu_home.iml" filepath="$PROJECT_DIR$/Lagou_edu_home/Lagou_edu_home.iml" />
       <module fileurl="file://$PROJECT_DIR$/Learn_spring/Learn_spring.iml" filepath="$PROJECT_DIR$/Learn_spring/Learn_spring.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Spring_AOP_XML/Spring_AOP_XML.iml" filepath="$PROJECT_DIR$/Spring_AOP_XML/Spring_AOP_XML.iml" />
       <module fileurl="file://$PROJECT_DIR$/Spring_transfer_IOC/Spring_transfer_IOC.iml" filepath="$PROJECT_DIR$/Spring_transfer_IOC/Spring_transfer_IOC.iml" />
       <module fileurl="file://$PROJECT_DIR$/hello_maven/hello_maven.iml" filepath="$PROJECT_DIR$/hello_maven/hello_maven.iml" />
     </modules>

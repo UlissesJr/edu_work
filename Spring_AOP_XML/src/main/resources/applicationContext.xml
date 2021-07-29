@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!--  目标类交给IOC容器  -->
+    <bean id="accountService" class="top.luobogan.service.impl.AccountServiceImpl"/>
+    <!--  通知类交给IOC容器  -->
+    <bean id="myAdvice" class="top.luobogan.advice.MyAdvice"/>
+
+    <!--  AOP配置  -->
+    <aop:config>
+        <!--  配置切面：切点+通知  -->
+        <aop:aspect ref="myAdvice">
+            <!--  method 通知 pointcut 切点  -->
+            <aop:before method="before" pointcut="execution(public void
+top.luobogan.service.impl.AccountServiceImpl.transfer())"/>
+        </aop:aspect>
+    </aop:config>
+
+    <!---->
+
+
+
+
+
+</beans>
