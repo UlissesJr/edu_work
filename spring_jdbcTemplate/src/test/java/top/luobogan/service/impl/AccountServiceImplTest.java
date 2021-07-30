@@ -10,8 +10,6 @@ import top.luobogan.service.AccountService;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:applicationContext.xml")
 public class AccountServiceImplTest {
