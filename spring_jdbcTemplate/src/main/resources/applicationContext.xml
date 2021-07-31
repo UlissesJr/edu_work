@@ -2,10 +2,17 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context
-       http://www.springframework.org/schema/context/spring-context.xsd">
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd
+">
 
     <context:component-scan base-package="top.luobogan"/>
     <context:property-placeholder location="classpath:jdbc.properties"/>
@@ -20,6 +27,41 @@
     <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
         <constructor-arg name="dataSource" ref="dataSource"/>
     </bean>
+
+    <!--事务管理器-->
+    <bean id="transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!--通知增强-->
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <!--定义事务的属性 *表示当前任意名称的方法都走默认配置
+            name：切点方法名称 isolation:事务的隔离级别
+            propagation 事务的传播行为  timeout 超时时间 read-only 是否只读
+        -->
+        <tx:attributes>
+            <tx:method name="*" isolation="REPEATABLE_READ" propagation="REQUIRED"
+                       timeout="-1" read-only="false"/>
+
+            <!--CRUD常用配置-->
+            <tx:method name="save*" propagation="REQUIRED"/>
+            <tx:method name="delete*" propagation="REQUIRED"/>
+            <tx:method name="update*" propagation="REQUIRED"/>
+            <tx:method name="find*" read-only="true"/>
+            <tx:method name="*"/>
+        </tx:attributes>
+    </tx:advice>
+
+
+
+    <!--aop配置-->
+    <aop:config>
+        <!--切面配置-->
+        <aop:advisor advice-ref="txAdvice" pointcut="execution(
+        * top.luobogan.service..*.*(..)
+        )"/>
+    </aop:config>
 
 
 </beans>
