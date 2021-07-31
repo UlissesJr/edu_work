@@ -10,10 +10,11 @@
         <outputRelativeToContentRoot value="true" />
         <module name="Lagou_edu_home" />
         <module name="spring_jdbcTemplate" />
-        <module name="Spring_AOP_XML" />
+        <module name="spring_web" />
         <module name="hello_maven" />
-        <module name="Learn_spring" />
         <module name="Spring_transfer_IOC" />
+        <module name="Spring_AOP_XML" />
+        <module name="Learn_spring" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="8">
@@ -21,8 +22,9 @@
       <module name="Lagou_edu_home" target="1.8" />
       <module name="Learn_spring" target="1.5" />
       <module name="Spring_AOP_XML" target="1.5" />
-      <module name="spring_jdbcTemplate" target="6" />
-      <module name="Spring_transfer_IOC" target="6" />
+      <module name="spring_jdbcTemplate" target="7" />
+      <module name="Spring_transfer_IOC" target="8" />
+      <module name="spring_web" target="8" />
     </bytecodeTargetLevel>
   </component>
 </project>
