@@ -3,6 +3,7 @@
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$/hello_maven" />
     <file type="web" url="file://$PROJECT_DIR$/Lagou_edu_home" />
+    <file type="web" url="file://$PROJECT_DIR$/Spring-MVC" />
     <file type="web" url="file://$PROJECT_DIR$/spring_web" />
   </component>
   <component name="MavenProjectsManager">
@@ -15,6 +16,7 @@
         <option value="$PROJECT_DIR$/Spring_AOP_XML/pom.xml" />
         <option value="$PROJECT_DIR$/spring_jdbcTemplate/pom.xml" />
         <option value="$PROJECT_DIR$/spring_web/pom.xml" />
+        <option value="$PROJECT_DIR$/Spring-MVC/pom.xml" />
       </list>
     </option>
   </component>
