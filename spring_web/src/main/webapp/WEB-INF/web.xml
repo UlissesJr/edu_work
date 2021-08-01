@@ -12,7 +12,18 @@
         <servlet-name>AccountServlet</servlet-name>
         <url-pattern>/accountServlet</url-pattern>
     </servlet-mapping>
-    
+
+    <!--  全局参数  指定applicationContext.xml的文件路径  -->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:applicationContext.xml</param-value>
+    </context-param>
+    <!--  Spring的监听器  ContextLoaderListener  -->
+    <listener>
+        <listener-class>
+            org.springframework.web.context.ContextLoaderListener
+        </listener-class>
+    </listener>
     
     
 </web-app>
