@@ -12,4 +12,22 @@
     <!--配置注解扫描-->
     <context:component-scan base-package="top.luobogan.controller"/>
 
+    <!--处理器映射器和处理器适配器功能增强 支持json的读写 -->
+    <mvc:annotation-driven/>
+    <!--视图解析器-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/pages/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!--自定义转换器配置-->
+    <bean id="conversionService"
+          class="org.springframework.context.support.ConversionServiceFactoryBean">
+        <property name="converters">
+            <set>
+                <bean class="top.luobogan.converter.DateConverter"/>
+            </set>
+        </property>
+    </bean>
+
 </beans>
